@@ -1,58 +1,68 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-1 col-xs-1 col-sm-1"></div>
-        <div class="col-md-10 col-xs-10 col-sm-10">
-            <h2 class="round3" style="text-align:center;">DATA LATIH</h2>
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
         </div>
-        <div class="col-md-1 col-xs-1 col-sm-1"></div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+        
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Data Cabai Rawit</h2>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <table id="datatable-buttons" class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    
+                    <th width="50%">Bulan</th>
+                    <th width="50%">
+                    <a class="btn btn-primary" href="{% url 'home:create' %}">
+                      Tambah
+                    </a>
+                    </th>
+                   
+                  </tr>
+                </thead>
+
+                <tbody>
+                {% for data in data_list %}
+                  <tr>
+                    <td><a href="{% url 'home:detail' data.pk %}">
+                        {{ data.bulan }}
+                    </td>
+                    <td>
+                        <a href="{% url 'home:edit' data.pk %}">
+                            <button type="button" class="btn btn-success">
+                                Edit
+                            </button>
+                        </a>
+                        <a href="{% url 'home:delete' data.pk %}">
+                            <button type="button" class="btn btn-danger">
+                                Hapus
+                            </button>
+                        </a>        
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-1 col-xs-10 col-sm-10"></div>
-        <div class="col-md-2 col-xs-1 col-sm-1">
-            <br />
-            <a href="{% url 'home:create' %}">
-                <button type="button" class="btn btn-success">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </a>
-        </div>
-    </div>
-    <br />
-    {% for data in data_list %}
-    <div class="row">
-        <div class="col-md-1 col-xs-1 col-sm-1"></div>
-        <div class="col-md-4 col-xs-7 col-sm-7">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="{% url 'home:detail' data.pk %}"> {{ data.bulan }} </a> <span class="badge"></span>
-                </li>
-            </ul>
-        </div>
-        <!--<div class="col-md-1 col-xs-1 col-sm-1">
-            <a href="{% url 'home:detail' data.pk %}">
-                <button type="button" class="btn btn-info">
-                    <span class="glyphicon glyphicon-open"></span>
-                </button>
-            </a>
-        </div>
-        <div class="col-md-1">
-            <a href="{% url 'home:edit' data.pk %}">
-                <button type="button" class="btn btn-info">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </a>
-        </div>
-        <div class="col-md-1">
-            <a href="{% url 'home:delete' data.pk %}">
-                <button type="button" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </button>
-            </a>
-        </div>-->
-        <div class="col-md-1 col-xs-1 col-sm-1"></div>
-    </div>
-    {% endfor %}
-</div>
-{% endblock %}
+  </div>
+  <!-- /page content -->
+
+  {% endblock %}

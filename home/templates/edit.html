@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
 
-</body>
-</html>
+<!-- page content -->
+<div class="right_col">
+    <div class="container">
+      <br/><br/><br/>
+      <legend>Tambah Data Cabai Rawit</legend>
+      <div class="col-xs-12 col-sm-12 col-md-12">
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% for hidden_field in form.hidden_fields %}
+                    {{ hidden_field }}
+                    {% endfor %}
+                    {% for field in form.visible_fields %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {% render_field field class="form-control" %}
+                        {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">OK</button>
+
+            </div>
+          </div>
+        </div>        
+        <!-- /page content -->
+{% endblock %}
