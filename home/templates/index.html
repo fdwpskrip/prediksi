@@ -23,7 +23,8 @@
                 <thead>
                   <tr>
                     
-                    <th width="50%">Bulan</th>
+                    <th width="25%">Bulan</th>
+                    <th width="25%">Tahun</th>
                     <th width="50%">
                     <a class="btn btn-primary" href="{% url 'home:create' %}">
                       Tambah
@@ -39,6 +40,9 @@
                     <td><a href="{% url 'home:detail' data.pk %}">
                         {{ data.bulan }}
                     </td>
+                    <td>
+                      {{ data.tahun }}
+                  </td>
                     <td>
                         <a href="{% url 'home:edit' data.pk %}">
                             <button type="button" class="btn btn-success">

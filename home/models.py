@@ -3,6 +3,7 @@ from django.db import models
 
 class Data(models.Model):
     bulan = models.CharField("Bulan", max_length=50, blank=True, null=True)
+    tahun = models.CharField("Tahun", max_length=50, blank=True, null=True)
     harga = models.CharField("Harga", max_length=50, blank=True, null=True)
     produksi = models.CharField("Produksi", max_length=50, blank=True, null=True)
     ketersediaan = models.CharField("Ketersediaan", max_length=50, blank=True, null=True)
