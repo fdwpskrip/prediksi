@@ -23,47 +23,40 @@
                 <thead>
                   <tr>
                     
-                    <th width="25%">Bulan</th>
-                    <th width="25%">Tahun</th>
-                    <th width="50%">
-                    <a class="btn btn-primary" href="{% url 'home:create' %}">
-                      Tambah
-                    </a>
+                    <th width="40%">Bulan</th>
+                    <th width="40%">Tahun</th>
+                    <th width="20%">
+                        <a class="btn btn-primary" href="{% url 'home:create' %}">Tambah</a>
                     </th>
                    
                   </tr>
                 </thead>
 
                 <tbody>
-                {% for data in data_list %}
-                  <tr>
-                    <td><a href="{% url 'home:detail' data.pk %}">
-                        {{ data.bulan }}
-                    </td>
-                    <td>
-                      {{ data.tahun }}
-                  </td>
-                    <td>
-                        <a href="{% url 'home:edit' data.pk %}">
-                            <button type="button" class="btn btn-success">
-                                Edit
-                            </button>
-                        </a>
-                        <a href="{% url 'home:delete' data.pk %}">
-                            <button type="button" class="btn btn-danger">
-                                Hapus
-                            </button>
-                        </a>        
-                    </td>
-                  </tr>
-                {% endfor %}
+                    {% for data in data_list %}
+                      <tr>
+                        <td>
+                            <a href="{% url 'home:detail' data.pk %}">{{ data.bulan }}</a>
+                        </td>
+                        <td>
+                          {{ data.tahun }}
+                        </td>
+                        <td>
+                            <a href="{% url 'home:edit' data.pk %}">
+                                <button type="button" class="btn btn-success">Edit</button>
+                            </a>
+                            <a href="{% url 'home:delete' data.pk %}">
+                                <button type="button" class="btn btn-danger">Hapus</button>
+                            </a>
+                        </td>
+                      </tr>
+                    {% endfor %}
                 </tbody>
+
               </table>
             </div>
           </div>
         </div>
-
-        
       </div>
     </div>
   </div>
