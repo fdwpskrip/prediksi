@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Data
-from .forms import DataForm
+from home.models import Data
+from home.forms import DataForm
 from django.views.generic import ListView, DetailView
 
 
 class IndexView(ListView):
-    template_name = 'index.html'
+    template_name = 'home_data.html'
     context_object_name = 'data_list'
 
     def get_queryset(self):

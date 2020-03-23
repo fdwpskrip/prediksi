@@ -23,8 +23,9 @@
                 <thead>
                   <tr>
                     
-                    <th width="40%">Bulan</th>
-                    <th width="40%">Tahun</th>
+                    <th width="10%">No</th>
+                    <th width="35%">Bulan</th>
+                    <th width="35%">Tahun</th>
                     <th width="20%">
                         <a class="btn btn-primary" href="{% url 'home:create' %}">Tambah</a>
                     </th>
@@ -35,20 +36,24 @@
                 <tbody>
                     {% for data in data_list %}
                       <tr>
-                        <td>
-                            <a href="{% url 'home:detail' data.pk %}">{{ data.bulan }}</a>
-                        </td>
-                        <td>
-                          {{ data.tahun }}
-                        </td>
-                        <td>
-                            <a href="{% url 'home:edit' data.pk %}">
-                                <button type="button" class="btn btn-success">Edit</button>
-                            </a>
-                            <a href="{% url 'home:delete' data.pk %}">
-                                <button type="button" class="btn btn-danger">Hapus</button>
-                            </a>
-                        </td>
+                          <td>
+                              {{ forloop.counter }}
+                          </td>
+
+                          <td>
+                              <a href="{% url 'home:detail' data.pk %}">{{ data.bulan }}</a>
+                          </td>
+                          <td>
+                              {{ data.tahun }}
+                          </td>
+                          <td>
+                              <a href="{% url 'home:edit' data.pk %}">
+                                  <button type="button" class="btn btn-success">Edit</button>
+                              </a>
+                              <a href="{% url 'home:delete' data.pk %}">
+                                  <button type="button" class="btn btn-danger">Hapus</button>
+                              </a>
+                          </td>
                       </tr>
                     {% endfor %}
                 </tbody>
