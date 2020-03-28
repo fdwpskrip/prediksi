@@ -11,6 +11,13 @@ class IndexView(ListView):
     def get_queryset(self):
         return Data.objects.all()
 
+class DataView(ListView):
+    template_name = 'home_cabairawit.html'
+    context_object_name = 'data_list'
+
+    def get_queryset(self):
+        return Data.objects.all()
+
 
 class DataDetailView(DetailView):
     model = Data

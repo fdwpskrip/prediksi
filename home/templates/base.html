@@ -49,7 +49,7 @@
                 <img src="{% static 'image/admin.png' %}" alt="." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Welcome, admin</span>
                 <!-- nama user -->
               </div>
             </div>
@@ -62,18 +62,13 @@
               <div class="menu_section">
                 
                 <ul class="nav side-menu">
-                  <!-- <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="{% url 'home:home_view' %}"><i class="fa fa-table"></i> Data </a>
+                  </li>
+                  <li><a><i class="fa fa-desktop"></i> Proses ELM <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url('kategori/create')?>">Kategori</a></li>
-                      <li><a href="<?php echo base_url('produk/create')?>">Produk</a></li>
-                      <li><a href="<?php echo base_url('pengguna/create')?>">User</a></li>
-                    </ul>
-                  </li> -->
-                  <li><a><i class="fa fa-table"></i> Data <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="{% url 'home:home_view' %}">Cabai Rawit</a></li>
+                      <li><a href="{% url 'home:data_cbrawit' %}">Cabai Rawit</a></li>
                       <!-- <li><a href="<?php echo base_url('produk/')?>">Cabai Merah Besar</a></li> -->
-                      <li><a href="{% url 'home:home_normalisasi' %}">Normalisasi</a></li>
+                      <li><a href="{% url 'home:data_cbmerah' %}">Cabai Merah Besar</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -112,7 +107,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <!-- nama user -->
+                  admin
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -127,18 +122,18 @@
         {% block content %}
         {% endblock %}
 
-         <!--<footer>
+         <footer>
           <div class="pull-right">
             Prediksi Cabai
           </div>
           <div class="clearfix"></div>
         </footer>
-        footer content -->
+        <!-- footer content -->
 
       </div>
       </div>
 
-    </div>
+    <!-- </div> -->
 
     <!-- jQuery -->
     <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>

@@ -26,7 +26,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Data Cabai Rawit</h2>
+              <h2>Data Cabai Merah Besar</h2>
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -38,7 +38,7 @@
                     <th width="35%">Bulan</th>
                     <th width="35%">Tahun</th>
                     <th width="20%">
-                        <a class="btn btn-primary" href="{% url 'home:create' %}">Tambah</a>
+                        <a class="btn btn-primary" href="{% url 'home:create_cbmerah' %}">Tambah</a>
                     </th>
                    
                   </tr>
@@ -52,16 +52,16 @@
                           </td>
 
                           <td>
-                              <a href="{% url 'home:detail' data.pk %}">{{ data.bulan }}</a>
+                              <a href="{% url 'home:detail_cbmerah' data.pk %}">{{ data.bulan }}</a>
                           </td>
                           <td>
                               {{ data.tahun }}
                           </td>
                           <td>
-                              <a href="{% url 'home:edit' data.pk %}">
+                              <a href="{% url 'home:edit_cbmerah' data.pk %}">
                                   <button type="button" class="btn btn-success">Edit</button>
                               </a>
-                              <a href="{% url 'home:delete' data.pk %}">
+                              <a href="{% url 'home:delete_cbmerah' data.pk %}">
                                   <button type="button" class="btn btn-danger">Hapus</button>
                               </a>
                           </td>
