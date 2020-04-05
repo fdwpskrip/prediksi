@@ -13,6 +13,7 @@ class Data(models.Model):
     def __str__(self):
         return self.bulan
 
+
 class cbMerah(models.Model):
     bulan = models.CharField("Bulan", max_length=50, blank=True, null=True)
     tahun = models.CharField("Tahun", max_length=50, blank=True, null=True)

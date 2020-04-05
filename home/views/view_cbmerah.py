@@ -3,12 +3,14 @@ from home.models import cbMerah
 from home.forms import cbMerahForm
 from django.views.generic import ListView, DetailView
 
+
 class IndexView(ListView):
     template_name = 'homedata_cbmerah.html'
     context_object_name = 'data_list'
 
     def get_queryset(self):
         return cbMerah.objects.all()
+
 
 class DataView(ListView):
     template_name = 'home_cabaimerah.html'
@@ -22,6 +24,7 @@ class DataDetailView(DetailView):
     model = cbMerah
     template_name = 'data-detailcbmerah.html'
 
+
 def create(request):
     if request.method == 'POST':
         form = cbMerahForm(request.POST)
@@ -31,6 +34,7 @@ def create(request):
     form = cbMerahForm()
 
     return render(request, 'create_cbmerah.html', {'form': form})
+
 
 def edit(request, pk, template_name='edit_cbmerah.html'):
     data = get_object_or_404(cbMerah, pk=pk)

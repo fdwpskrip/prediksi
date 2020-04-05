@@ -5,50 +5,46 @@
 <div class="right_col">
     <div class="container">
         <br/>
-        <legend>Detail Data Cabai Merah Bulan {{ data.bulan }}</legend>
+        <legend>Detail Data Cabai Merah Bulan {{ cbmerah.bulan }}</legend>
         <div class="content">
             <div class="form-group">
                 <label for="bulan">Bulan</label>
-                <p>{{ data.bulan }}</p>
+                <p>{{ cbmerah.bulan }}</p>
             </div>
 
             <div class="form-group">
                 <label for="bulan">Tahun</label>
-                <p>{{ data.tahun }}</p>
+                <p>{{ cbmerah.tahun }}</p>
             </div>
 
             <div class="form-group">
                 <label for="harga">Harga</label>
-                <p>{{ data.harga }}</p>
+                <p>{{ cbmerah.harga }}</p>
             </div>
 
             <div class="form-group">
                 <label for="produksi">Produksi (KW) </label>
-                <p>{{ data.produksi }}</p>
+                <p>{{ cbmerah.produksi }}</p>
             </div>
 
             <div class="form-group">
                 <label for="ketersediaan">Ketersediaan (TON) </label>
-                <p>{{ data.ketersediaan }}</p>
+                <p>{{ cbmerah.ketersediaan }}</p>
             </div>
 
             <div class="form-group">
                 <label for="permintaan">Permintaan (TON) </label>
-                <p>{{ data.permintaan }}</p>
+                <p>{{ cbmerah.permintaan }}</p>
             </div>
+        </div>
 
-     
+        <a href="{% url 'home:homeview_cbmerah' %}">
+            <button type="button" class="btn btn-success">
+                Kembali
+            </button>
+        </a>
+    </div>
 </div>
-
-<a href="{% url 'home:home_view' %}">
-    <button type="button" class="btn btn-success">
-        Kembali
-    </button>
-</a>
-
-</div>
-</div>
-</div>        
 <!-- /page content -->
 
 {% endblock %}

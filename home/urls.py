@@ -21,14 +21,14 @@ app_name = 'home'
 
 urlpatterns = [
     path('data/', view_data.IndexView.as_view(), name='home_view'),
-    path('<int:pk>/', view_data.DataDetailView.as_view(), name='detail'),
+    path('cabairawit/<int:pk>/', view_data.DataDetailView.as_view(), name='detail'),
     path('edit/<int:pk>/', view_data.edit, name='edit'),
     path('create/', view_data.create, name='create'),
     path('delete/<int:pk>/', view_data.delete, name='delete'),
     path('datacbrawit/', view_data.DataView.as_view(), name='data_cbrawit'),
 
     path('cbMerah/', view_cbmerah.IndexView.as_view(), name='homeview_cbmerah'),
-    path('<int:pk>/', view_cbmerah.DataDetailView.as_view(), name='detail_cbmerah'),
+    path('cabaimerah/<int:pk>/', view_cbmerah.DataDetailView.as_view(), name='detail_cbmerah'),
     path('editCbMerah/<int:pk>/', view_cbmerah.edit, name='edit_cbmerah'),
     path('createCbMerah/', view_cbmerah.create, name='create_cbmerah'),
     path('deleteCbMerah/<int:pk>/', view_cbmerah.delete, name='delete_cbmerah'),

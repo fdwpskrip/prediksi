@@ -36,19 +36,15 @@
                 <label for="permintaan">Permintaan (TON) </label>
                 <p>{{ data.permintaan }}</p>
             </div>
+        </div>
 
-     
+        <a href="{% url 'home:home_view' %}">
+            <button type="button" class="btn btn-success">
+                Kembali
+            </button>
+        </a>
+    </div>
 </div>
-
-<a href="{% url 'home:home_view' %}">
-    <button type="button" class="btn btn-success">
-        Kembali
-    </button>
-</a>
-
-</div>
-</div>
-</div>        
 <!-- /page content -->
 
 {% endblock %}
