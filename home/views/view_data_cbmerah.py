@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView
 
 
 class IndexView(ListView):
-    template_name = 'homedata_cbmerah.html'
+    template_name = 'home_data_cbmerah.html'
     context_object_name = 'data_list'
 
     def get_queryset(self):
@@ -13,7 +13,7 @@ class IndexView(ListView):
 
 
 class DataView(ListView):
-    template_name = 'home_cabaimerah.html'
+    template_name = 'proses_data_cbmerah.html'
     context_object_name = 'data_list'
 
     def get_queryset(self):
