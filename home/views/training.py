@@ -1,6 +1,7 @@
 from home.views import normalisasi
 import logging
 import math
+import numpy as np
 
 logger = logging.getLogger(__name__)
 
@@ -32,6 +33,18 @@ def calculate_hinit():
     # H-Transpose
     data_h_transpose = get_h_transpose(data_h_eks)
 
+    # Matriks H
+    data_matriks_h = get_matriks_h(data_h_transpose, data_h_eks)
+
+    # Matriks Invers
+    data_matriks_inv = get_matriks_inv(data_matriks_h)
+
+    # Matriks Moore-Penrose
+    data_matriks_mp = get_matriks_mp(data_matriks_inv, data_h_transpose)
+
+    # Output Weight
+    data_output_weight = get_output_weight(data_matriks_mp, data_y_training)
+
     data_training = {
         'data_x_training': data_x_training,
         'data_y_training': data_y_training,
@@ -41,7 +54,11 @@ def calculate_hinit():
         'data_weight_transpose': data_weight_transpose,
         'data_h_init': data_h_init,
         'data_h_eks': data_h_eks,
-        'data_h_transpose': data_h_transpose
+        'data_h_transpose': data_h_transpose,
+        'data_matriks_h': data_matriks_h,
+        'data_matriks_inv': data_matriks_inv,
+        'data_matriks_mp': data_matriks_mp,
+        'data_output_weight': data_output_weight
     }
 
     return data_training
@@ -64,9 +81,12 @@ def get_normalisasi():
             'produksi': dt['produksi'],
             'ketersediaan': dt['ketersediaan']
         }
-        y = {
-            'permintaan': dt['permintaan']
-        }
+
+        # y = {
+        #     'permintaan': dt['permintaan']
+        # }
+
+        y = [float(dt['permintaan'])]
 
         data_x.append(x)
         data_y.append(y)
@@ -151,8 +171,6 @@ def get_h_init(data_x_training, data_bias, data_weight_transpose):
 
             h = x1 + x2 + x3 + data_bias[j]
 
-            logger.error(x)
-
             h_init.append(h)
 
         data_h_init.append(h_init)
@@ -204,6 +222,79 @@ def get_matriks_h(data_h_transpose, data_h_eks):
 
     for i, x in enumerate(data_h_transpose):
 
+        sm = []
+
         for j, y in enumerate(x):
 
-            x = y * data_h_eks[j][i]
+            for k, z in enumerate(data_h_eks[j]):
+
+                m = y * z
+
+                if j == 0:
+                    sm.append(m)
+                else:
+                    sm[k] = sm[k] + m
+
+        data_matriks_h.append(sm)
+
+    return data_matriks_h
+
+
+# Matriks Invers
+def get_matriks_inv(data_matriks_h):
+    m = np.array(data_matriks_h)
+    m_inv = np.linalg.inv(m)
+
+    return m_inv
+
+
+# Matriks Moore-Penrose
+def get_matriks_mp(data_matriks_inv, data_h_transpose):
+
+    data_matriks_mp = []
+
+    for i, x in enumerate(data_matriks_inv):
+
+        sm = []
+
+        for j, y in enumerate(x):
+
+            for k, z in enumerate(data_h_transpose[j]):
+
+                m = y * z
+
+                if j == 0:
+                    sm.append(m)
+                else:
+                    sm[k] = sm[k] + m
+
+        data_matriks_mp.append(sm)
+
+    return data_matriks_mp
+
+
+# Output Weight
+def get_output_weight(data_matriks_mp, data_y_training):
+
+    data_output_weight = []
+
+    logger.error(data_y_training)
+
+    for i, x in enumerate(data_matriks_mp):
+
+        sm = []
+
+        for j, y in enumerate(x):
+
+            for k, z in enumerate(data_y_training[j]):
+
+                m = y * z
+
+                if j == 0:
+                    sm.append(m)
+                else:
+                    sm[k] = sm[k] + m
+
+        data_output_weight.append(sm)
+
+    return data_output_weight
