@@ -13,9 +13,13 @@ class IndexView(ListView):
         context = {
             'data_x_training': data_training['data_x_training'],
             'data_y_training': data_training['data_y_training'],
+            'hidden_neuron': data_training['hidden_neuron'],
             'data_weight': data_training['data_weight'],
             'data_bias': data_training['data_bias'],
-            'data_weight_transpose': data_training['data_weight_transpose']
+            'data_weight_transpose': data_training['data_weight_transpose'],
+            'data_h_init': data_training['data_h_init'],
+            'data_h_eks': data_training['data_h_eks'],
+            'data_h_transpose': data_training['data_h_transpose']
         }
 
         return context

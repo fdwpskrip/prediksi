@@ -1,5 +1,6 @@
 from home.views import normalisasi
 import logging
+import math
 
 logger = logging.getLogger(__name__)
 
@@ -10,6 +11,9 @@ def calculate_hinit():
     data_x_training = get_normalisasi()['data_x_training']
     data_y_training = get_normalisasi()['data_y_training']
 
+    # Jumlah Hidden Neuron
+    hidden_neuron = 3
+
     # Weight
     data_weight = get_weight()
 
@@ -17,14 +21,27 @@ def calculate_hinit():
     data_bias = get_bias()
 
     # Weight Transpose
-    data_weight_transpose = get_w_transpose()
+    data_weight_transpose = get_w_transpose(data_weight)
+
+    # H-Init
+    data_h_init = get_h_init(data_x_training, data_bias, data_weight_transpose)
+
+    # H-Eksponensial
+    data_h_eks = get_h_eksponensial(data_h_init)
+
+    # H-Transpose
+    data_h_transpose = get_h_transpose(data_h_eks)
 
     data_training = {
         'data_x_training': data_x_training,
         'data_y_training': data_y_training,
+        'hidden_neuron': hidden_neuron,
         'data_weight': data_weight,
         'data_bias': data_bias,
-        'data_weight_transpose': data_weight_transpose
+        'data_weight_transpose': data_weight_transpose,
+        'data_h_init': data_h_init,
+        'data_h_eks': data_h_eks,
+        'data_h_transpose': data_h_transpose
     }
 
     return data_training
@@ -93,20 +110,12 @@ def get_weight():
 
 # Set Nilai Bias
 def get_bias():
-    bias = {
-        '1': 0.195826602,
-        '2': 0.248667800,
-        '3': 0.07703571
-    }
-
-    data_bias = [bias]
-
+    data_bias = [0.195826602, 0.248667800, 0.07703571]
     return data_bias
 
 
 # W-Transpose
-def get_w_transpose():
-    data_weight = get_weight()
+def get_w_transpose(data_weight):
     data_harga = []
     data_produksi = []
     data_ketersediaan = []
@@ -121,34 +130,80 @@ def get_w_transpose():
     return data_weight_transpose
 
 
-# H Init
-def get_h_init():
-    data_x_training = get_normalisasi()['data_x_training']
-    data_bias = get_bias()
-    data_weight_transpose = get_w_transpose()
+# H-Init
+def get_h_init(data_x_training, data_bias, data_weight_transpose):
 
     data_h_init = []
+    hidden_neuron = 3
 
     for i, x in enumerate(data_x_training):
-        h_init = []
-        for j in range(len(data_weight_transpose)):
-            wt_1 = 0
-            wt_2 = 0
-            wt_3 = 0
 
-            if  j == 0:
-                wt_1 = float(data_weight_transpose[0]['harga'])
-                wt_2 = float(data_weight_transpose[1]['harga'])
-                wt_3 = float(data_weight_transpose[1]['harga'])
-            if  j == 0:
-                wt_1 = float(data_weight_transpose[0]['produksi'])
-                wt_2 = float(data_weight_transpose[1]['produksi'])
-                wt_3 = float(data_weight_transpose[1]['produksi'])
-            if  j == 0:
-                wt_1 = float(data_weight_transpose[0]['ketersediaan'])
-                wt_2 = float(data_weight_transpose[1]['ketersediaan'])
-                wt_3 = float(data_weight_transpose[1]['ketersediaan'])
+        h_init = []
+        for j in range(hidden_neuron):
+
+            wt_1 = float(data_weight_transpose[0][j])
+            wt_2 = float(data_weight_transpose[1][j])
+            wt_3 = float(data_weight_transpose[2][j])
 
             x1 = float(x['harga']) * wt_1
             x2 = float(x['produksi']) * wt_2
             x3 = float(x['ketersediaan']) * wt_3
+
+            h = x1 + x2 + x3 + data_bias[j]
+
+            logger.error(x)
+
+            h_init.append(h)
+
+        data_h_init.append(h_init)
+
+    return data_h_init
+
+
+# H-Eksponensial
+def get_h_eksponensial(data_h_init):
+
+    data_h_eks = []
+
+    for i, x in enumerate(data_h_init):
+
+        h_eks = []
+        for j, y in enumerate(x):
+
+            h = 1 / (1 + math.exp(-1 * y))
+
+            h_eks.append(h)
+
+        data_h_eks.append(h_eks)
+
+    return data_h_eks
+
+
+# H-Transpose
+def get_h_transpose(data_h_eks):
+
+    data_h_transpose = []
+
+    for i, x in enumerate(data_h_eks):
+
+        for j, y in enumerate(x):
+
+            if i == 0:
+                h = [y]
+                data_h_transpose.append(h)
+            else:
+                data_h_transpose[j].append(y)
+
+    return data_h_transpose
+
+
+# Matriks H
+def get_matriks_h(data_h_transpose, data_h_eks):
+
+    data_matriks_h = []
+
+    for i, x in enumerate(data_h_transpose):
+
+        for j, y in enumerate(x):
+
+            x = y * data_h_eks[j][i]
