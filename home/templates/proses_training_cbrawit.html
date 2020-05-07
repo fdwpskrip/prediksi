@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% block content %}
+
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
@@ -40,40 +42,69 @@
                   <div class="clearfix"></div>
               </div>
 
-              <div class="form-group">
-                  <label for="hidden_neuron">Hidden Neuron</label>
-                  <input type="text" class="form-control" id="hidden_neuron" name="hidden_neuron" placeholder="Masukkan Hidden Neuron">
-              </div>
+              <form method="POST" novalidate>
+                  {% csrf_token %}
+<!--                  {{ data.form }}-->
+                  {% for field in data.form %}
+                  <div class="form-group">
+                      {{ field.label_tag }}
+                      {% render_field field class="form-control" %}
+                      {% if field.help_text %}
+                      <small class="form-text text-muted">{{ field.help_text }}</small>
+                      {% endif %}
+                  </div>
+                  {% endfor %}
+<!--                  {% if form.errors %}-->
+<!--                    {% for field in form %}-->
+<!--                        {% for error in field.errors %}-->
+<!--                            <div class="alert alert-danger">-->
+<!--                                <strong>{{ error|escape }}</strong>-->
+<!--                            </div>-->
+<!--                        {% endfor %}-->
+<!--                    {% endfor %}-->
+<!--                    {% for error in form.non_field_errors %}-->
+<!--                        <div class="alert alert-danger">-->
+<!--                            <strong>{{ error|escape }}</strong>-->
+<!--                        </div>-->
+<!--                    {% endfor %}-->
+<!--                  {% endif %}-->
+<!--                  <div class="form-group">-->
+<!--                      <label for="hidden_neuron">Hidden Neuron</label>-->
+<!--                      <input type="text" class="form-control" id="hidden_neuron" name="hidden_neuron" placeholder="Masukkan Hidden Neuron">-->
+<!--                  </div>-->
 
-              <div class="form-group">
-                  <label> Rasio Data Training dan Testing </label>
-                      <select class="form-control" name ="rasio_data" id="rasio_data">
-                        <option selected> --Pilih Rasio Data-- </option>
-                        <option value="50%:50%">50% : 50%</option>
-                        <option value="60%:40%">60% : 40%</option>
-                        <option value="70%:30%">70% : 30%</option>
-                        <option value="80%:20%">80% : 20%</option>
-                        <option value="90%:10%">90% : 10%</option>
-                        <option value="10%:90%">10% : 90%</option>
-                        <option value="20%:80%">20% : 80%</option>
-                        <option value="30%:70%">30% : 70%</option>
-                        <option value="40%:60%">40% : 60%</option>
-                      </select>
-              </div>
+<!--                  <div class="form-group">-->
+<!--                      <label> Rasio Data Training dan Testing </label>-->
+<!--                          <select class="form-control" name ="rasio_data" id="rasio_data">-->
+<!--                            <option selected> &#45;&#45;Pilih Rasio Data&#45;&#45; </option>-->
+<!--                            <option value="50:50">50% : 50%</option>-->
+<!--                            <option value="60:40">60% : 40%</option>-->
+<!--                            <option value="70:30">70% : 30%</option>-->
+<!--                            <option value="80:20">80% : 20%</option>-->
+<!--                            <option value="90:10">90% : 10%</option>-->
+<!--                            <option value="10:90">10% : 90%</option>-->
+<!--                            <option value="20:80">20% : 80%</option>-->
+<!--                            <option value="30:70">30% : 70%</option>-->
+<!--                            <option value="40:60">40% : 60%</option>-->
+<!--                          </select>-->
+<!--                  </div>-->
 
-              <div class="form-group">
-                  <label> Jumlah Data Training : (otomatis terisi jumlah data training)</label>
-              </div>
+                  <div class="form-group">
+                      <label> Jumlah Data Training : {{ data.rasio_data_training }} </label>
+                  </div>
 
-              <div class="form-group">
-                  <label> Jumlah Data Testing : (otomatis terisi jumlah data testing)</label>
-              </div>
+                  <div class="form-group">
+                      <label> Jumlah Data Testing : {{ data.rasio_data_testing }} </label>
+                  </div>
 
-              <button type="submit" class="btn btn-info pull-right" id="btn_proses_training">Proses</button>
+                  <button type="submit" class="btn btn-info pull-right" id="btn_proses_training">Proses</button>
+              </form>
+
           </div>
         </div>
 
-        <div class="col-md-12 col-sm-12 col-xs-12" id="div_proses_training" style="display: none">
+        <div class="col-md-12 col-sm-12 col-xs-12" id="div_proses_training" style="display: {{ data.display }}">
+
             <div class="x_panel">
                 <div class="x_title">
                     <h3><b>1. Menentukan hidden neuron, matriks bobot (weight) dan bias</b></h3>
@@ -128,7 +159,7 @@
                                             {{ forloop.counter }}
                                         </td>
                                         <td>
-                                            {{ data_t.permintaan }}
+                                            {{ data_t.0 }}
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -215,15 +246,12 @@
                                                 Ketersediaan (TON)
                                             {% endif %}
                                         </td>
+
+                                        {% for data_x in data_w %}
                                         <td>
-                                            {{ data_w.0 }}
+                                            {{ data_x }}
                                         </td>
-                                        <td>
-                                            {{ data_w.1 }}
-                                        </td>
-                                        <td>
-                                            {{ data_w.2 }}
-                                        </td>
+                                        {% endfor %}
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -474,7 +502,6 @@
             </div>
 
         </div>
-
     </div>
 </div>
 <!-- /page content -->

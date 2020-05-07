@@ -1,31 +1,59 @@
 from home.views import normalisasi
 import logging
 import math
+import random
 import numpy as np
 
 logger = logging.getLogger(__name__)
 
 
-def calculate_hinit():
+def calculate_hinit(hidden_neuron, rasio):
+
+    # Data
+    data_normalisasi = normalisasi.getnormalisasi_cbrawit()['n_data']
+    data_size = len(data_normalisasi)
+
+    rasio_data_training = {
+        '-': math.ceil(data_size * 0.5),
+        '50:50': math.ceil(data_size * 0.5),
+        '60:40': math.ceil(data_size * 0.6),
+        '70:30': math.ceil(data_size * 0.7),
+        '80:20': math.ceil(data_size * 0.8),
+        '90:10': math.ceil(data_size * 0.9),
+        '10:90': math.ceil(data_size * 0.1),
+        '20:80': math.ceil(data_size * 0.2),
+        '30:70': math.ceil(data_size * 0.3),
+        '40:60': math.ceil(data_size * 0.4)
+    }
+
+    rasio_data_testing = {
+        '-': data_size - math.ceil(data_size * 0.5),
+        '50:50': data_size - math.ceil(data_size * 0.5),
+        '60:40': data_size - math.ceil(data_size * 0.6),
+        '70:30': data_size - math.ceil(data_size * 0.7),
+        '80:20': data_size - math.ceil(data_size * 0.8),
+        '90:10': data_size - math.ceil(data_size * 0.9),
+        '10:90': data_size - math.ceil(data_size * 0.1),
+        '20:80': data_size - math.ceil(data_size * 0.2),
+        '30:70': data_size - math.ceil(data_size * 0.3),
+        '40:60': data_size - math.ceil(data_size * 0.4)
+    }
 
     # Normalisasi
-    data_x_training = get_normalisasi()['data_x_training']
-    data_y_training = get_normalisasi()['data_y_training']
-
-    # Jumlah Hidden Neuron
-    hidden_neuron = 3
+    data_x_training = get_normalisasi(data_normalisasi, rasio_data_training.get(rasio))['data_x_training']
+    data_y_training = get_normalisasi(data_normalisasi, rasio_data_training.get(rasio))['data_y_training']
 
     # Weight
-    data_weight = get_weight()
+    data_weight = get_weight(hidden_neuron)
 
     # Bias
-    data_bias = get_bias()
+    data_bias = get_bias(hidden_neuron)
 
     # Weight Transpose
     data_weight_transpose = get_w_transpose(data_weight)
 
     # H-Init
-    data_h_init = get_h_init(data_x_training, data_bias, data_weight_transpose)
+    data_h_init = get_h_init(hidden_neuron, data_x_training, data_bias, data_weight_transpose)
 
     # H-Eksponensial
     data_h_eks = get_h_eksponensial(data_h_init)
@@ -58,22 +86,24 @@ def calculate_hinit():
         'data_matriks_h': data_matriks_h,
         'data_matriks_inv': data_matriks_inv,
         'data_matriks_mp': data_matriks_mp,
-        'data_output_weight': data_output_weight
+        'data_output_weight': data_output_weight,
+        'rasio_data_training': rasio_data_training.get(rasio),
+        'rasio_data_testing': rasio_data_testing.get(rasio)
     }
 
     return data_training
 
 
 # Normalisasi
-def get_normalisasi():
-    data = normalisasi.getnormalisasi_cbrawit()
-    data_normalisasi = data['n_data']
+def get_normalisasi(data_normalisasi, rasio_data):
 
     data_x = []
     data_y = []
     data_x_training = []
     data_y_training = []
-    data_training_len = 7
+    data_training_len = rasio_data
+
+    print(rasio_data)
 
     for dt in data_normalisasi:
         x = {
@@ -92,10 +122,9 @@ def get_normalisasi():
         data_y.append(y)
 
     # Data Normalisasi
-    if len(data_normalisasi) >= 10:
-        for i in range(data_training_len):
-            data_x_training.append(data_x[i])
-            data_y_training.append(data_y[i])
+    for i in range(data_training_len):
+        data_x_training.append(data_x[i])
+        data_y_training.append(data_y[i])
 
     data_n = {
         'data_x_training': data_x_training,
@@ -106,31 +135,44 @@ def get_normalisasi():
 
 
 # Set Nilai Weight
-def get_weight():
-    weight_1 = {
-        'harga': 0.061770227,
-        'produksi': 0.052824088,
-        'ketersediaan': 0.157952941
-    }
-    weight_2 = {
-        'harga': 0.179735009,
-        'produksi': 0.59817741,
-        'ketersediaan': 0.008778016
-    }
-    weight_3 = {
-        'harga': 0.731199281,
-        'produksi': 0.386755785,
-        'ketersediaan': 0.361700354
-    }
+def get_weight(hidden_neuron):
+    # dummy
+    # weight_1 = {
+    #     'harga': 0.061770227,
+    #     'produksi': 0.052824088,
+    #     'ketersediaan': 0.157952941
+    # }
+    # weight_2 = {
+    #     'harga': 0.179735009,
+    #     'produksi': 0.59817741,
+    #     'ketersediaan': 0.008778016
+    # }
+    # weight_3 = {
+    #     'harga': 0.731199281,
+    #     'produksi': 0.386755785,
+    #     'ketersediaan': 0.361700354
+    # }
 
-    data_weight = [weight_1, weight_2, weight_3]
+    data_weight = []
+
+    for i in range(hidden_neuron):
+        weight = {
+            'harga': random.uniform(-1, 1),
+            'produksi': random.uniform(-1, 1),
+            'ketersediaan': random.uniform(-1, 1)
+        }
+        data_weight.append(weight)
 
     return data_weight
 
 
 # Set Nilai Bias
-def get_bias():
-    data_bias = [0.195826602, 0.248667800, 0.07703571]
+def get_bias(hidden_neuron):
+    data_bias = []
+    for i in range(hidden_neuron):
+        bias = random.uniform(-1, 1)
+        data_bias.append(bias)
+
     return data_bias
 
 
@@ -151,10 +193,9 @@ def get_w_transpose(data_weight):
 
 
 # H-Init
-def get_h_init(data_x_training, data_bias, data_weight_transpose):
+def get_h_init(hidden_neuron, data_x_training, data_bias, data_weight_transpose):
 
     data_h_init = []
-    hidden_neuron = 3
 
     for i, x in enumerate(data_x_training):
 
@@ -277,8 +318,6 @@ def get_matriks_mp(data_matriks_inv, data_h_transpose):
 def get_output_weight(data_matriks_mp, data_y_training):
 
     data_output_weight = []
-
-    logger.error(data_y_training)
 
     for i, x in enumerate(data_matriks_mp):
 
