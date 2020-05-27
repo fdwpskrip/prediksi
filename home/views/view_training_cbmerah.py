@@ -45,7 +45,7 @@ class IndexView(ListView):
             hidden_neuron = form.cleaned_data['hidden_neuron']
             rasio_data = form.cleaned_data['rasio_data']
 
-            data_training = training.calculate_hinit(int(hidden_neuron), rasio_data)
+            data_training = training.calculate_hinit('cbmerah', int(hidden_neuron), rasio_data)
 
             context = {
                 'data_x_training': data_training['data_x_training'],

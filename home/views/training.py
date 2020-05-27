@@ -7,10 +7,15 @@ import numpy as np
 logger = logging.getLogger(__name__)
 
 
-def calculate_hinit(hidden_neuron, rasio):
+def calculate_hinit(datatype, hidden_neuron, rasio):
 
     # Data
-    data_normalisasi = normalisasi.getnormalisasi_cbrawit()['n_data']
+    data = {
+        'cbrawit': normalisasi.getnormalisasi_cbrawit()['n_data'],
+        'cbmerah': normalisasi.getnormalisasi_cbmerah()['n_data']
+    }
+
+    data_normalisasi = data.get(datatype)
     data_size = len(data_normalisasi)
 
     rasio_data_training = {
@@ -40,8 +45,9 @@ def calculate_hinit(hidden_neuron, rasio):
     }
 
     # Normalisasi
-    data_x_training = get_normalisasi(data_normalisasi, rasio_data_training.get(rasio))['data_x_training']
-    data_y_training = get_normalisasi(data_normalisasi, rasio_data_training.get(rasio))['data_y_training']
+    dt_normalisasi = get_normalisasi(data_normalisasi, rasio_data_training.get(rasio), rasio_data_testing.get(rasio))
+    data_x_training = dt_normalisasi['data_x_training']
+    data_y_training = dt_normalisasi['data_y_training']
 
     # Weight
     data_weight = get_weight(hidden_neuron)
@@ -95,15 +101,12 @@ def calculate_hinit(hidden_neuron, rasio):
 
 
 # Normalisasi
-def get_normalisasi(data_normalisasi, rasio_data):
+def get_normalisasi(data_normalisasi, rasio_training, rasio_testing):
 
     data_x = []
     data_y = []
-    data_x_training = []
-    data_y_training = []
-    data_training_len = rasio_data
-
-    print(rasio_data)
+    data_training_len = rasio_training
+    data_testing_len = rasio_testing
 
     for dt in data_normalisasi:
         x = {
@@ -122,13 +125,19 @@ def get_normalisasi(data_normalisasi, rasio_data):
         data_y.append(y)
 
     # Data Normalisasi
-    for i in range(data_training_len):
-        data_x_training.append(data_x[i])
-        data_y_training.append(data_y[i])
+    data_x_training = data_x[:data_training_len]
+    data_y_training = data_y[:data_training_len]
+
+    data_x_testing = data_x[-data_testing_len:]
+    data_y_testing = data_y[-data_testing_len:]
+
+    print(data_x_testing)
 
     data_n = {
         'data_x_training': data_x_training,
         'data_y_training': data_y_training,
+        'data_x_testing': data_x_testing,
+        'data_y_testing': data_y_testing
     }
 
     return data_n

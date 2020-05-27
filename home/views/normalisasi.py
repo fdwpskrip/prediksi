@@ -1,13 +1,13 @@
-from home.models import Data
-from home.models import cbMerah
+from home.models import DataCbRawit
+from home.models import DataCbMerah
 
 
 def getnormalisasi_cbrawit():
-    listdata = Data.objects.all()
-    listharga = Data.objects.values_list('harga', flat=True)
-    listproduksi = Data.objects.values_list('produksi', flat=True)
-    listketersediaan = Data.objects.values_list('ketersediaan', flat=True)
-    listpermintaan = Data.objects.values_list('permintaan', flat=True)
+    listdata = DataCbRawit.objects.all()
+    listharga = DataCbRawit.objects.values_list('harga', flat=True)
+    listproduksi = DataCbRawit.objects.values_list('produksi', flat=True)
+    listketersediaan = DataCbRawit.objects.values_list('ketersediaan', flat=True)
+    listpermintaan = DataCbRawit.objects.values_list('permintaan', flat=True)
 
     data_cbrawit = {
         'listdata': listdata,
@@ -21,11 +21,11 @@ def getnormalisasi_cbrawit():
 
 
 def getnormalisasi_cbmerah():
-    listdata = cbMerah.objects.all()
-    listharga = cbMerah.objects.values_list('harga', flat=True)
-    listproduksi = cbMerah.objects.values_list('produksi', flat=True)
-    listketersediaan = cbMerah.objects.values_list('ketersediaan', flat=True)
-    listpermintaan = cbMerah.objects.values_list('permintaan', flat=True)
+    listdata = DataCbMerah.objects.all()
+    listharga = DataCbMerah.objects.values_list('harga', flat=True)
+    listproduksi = DataCbMerah.objects.values_list('produksi', flat=True)
+    listketersediaan = DataCbMerah.objects.values_list('ketersediaan', flat=True)
+    listpermintaan = DataCbMerah.objects.values_list('permintaan', flat=True)
 
     data_cbmerah = {
         'listdata': listdata,

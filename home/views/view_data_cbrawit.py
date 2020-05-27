@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from home.models import Data
-from home.forms import DataForm
+from home.models import DataCbRawit
+from home.forms import DataCbRawitForm
 from django.views.generic import ListView, DetailView
 
 
@@ -9,7 +9,7 @@ class IndexView(ListView):
     context_object_name = 'data_list'
 
     def get_queryset(self):
-        return Data.objects.all()
+        return DataCbRawit.objects.all()
 
 
 class DataView(ListView):
@@ -17,28 +17,28 @@ class DataView(ListView):
     context_object_name = 'data_list'
 
     def get_queryset(self):
-        return Data.objects.all()
+        return DataCbRawit.objects.all()
 
 
 class DataDetailView(DetailView):
-    model = Data
+    model = DataCbRawit
     template_name = 'data-detail.html'
 
 
 def create(request):
     if request.method == 'POST':
-        form = DataForm(request.POST)
+        form = DataCbRawitForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home:home_view')
-    form = DataForm()
+    form = DataCbRawitForm()
 
     return render(request, 'create.html', {'form': form})
 
 
 def edit(request, pk, template_name='edit.html'):
-    data = get_object_or_404(Data, pk=pk)
-    form = DataForm(request.POST or None, instance=data)
+    data = get_object_or_404(DataCbRawit, pk=pk)
+    form = DataCbRawitForm(request.POST or None, instance=data)
     if form.is_valid():
         form.save()
         return redirect('home:home_view')
@@ -46,7 +46,7 @@ def edit(request, pk, template_name='edit.html'):
 
 
 def delete(request, pk, template_name='confirm_delete.html'):
-    contact = get_object_or_404(Data, pk=pk)
+    contact = get_object_or_404(DataCbRawit, pk=pk)
     if request.method == 'POST':
         contact.delete()
         return redirect('home:home_view')
