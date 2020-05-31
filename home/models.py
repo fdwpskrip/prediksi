@@ -89,3 +89,21 @@ class DataBiasCbMerah(models.Model):
 
     def __str__(self):
         return self.no
+
+
+class DataOutputWeightCbRawit(models.Model):
+    no = models.CharField("No", max_length=50, blank=True, null=True)
+    weight = models.CharField("Weight", max_length=50, blank=True, null=True)
+    created_at = models.DateTimeField("Created At", auto_now_add=True)
+
+    def __str__(self):
+        return self.no
+
+
+class DataOutputWeightCbMerah(models.Model):
+    no = models.CharField("No", max_length=50, blank=True, null=True)
+    weight = models.CharField("Weight", max_length=50, blank=True, null=True)
+    created_at = models.DateTimeField("Created At", auto_now_add=True)
+
+    def __str__(self):
+        return self.no

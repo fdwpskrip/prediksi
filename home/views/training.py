@@ -1,3 +1,5 @@
+from home.models import DataNormalisasiCbRawit, DataNormalisasiCbMerah, DataWeightCbRawit, DataWeightCbMerah, \
+    DataBiasCbRawit, DataBiasCbMerah, DataOutputWeightCbRawit, DataOutputWeightCbMerah
 from home.views import normalisasi
 import logging
 import math
@@ -48,6 +50,8 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
     dt_normalisasi = get_normalisasi(data_normalisasi, rasio_data_training.get(rasio), rasio_data_testing.get(rasio))
     data_x_training = dt_normalisasi['data_x_training']
     data_y_training = dt_normalisasi['data_y_training']
+    data_x_testing = dt_normalisasi['data_x_testing']
+    data_y_testing = dt_normalisasi['data_y_testing']
 
     # Weight
     data_weight = get_weight(hidden_neuron)
@@ -78,6 +82,83 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
 
     # Output Weight
     data_output_weight = get_output_weight(data_matriks_mp, data_y_training)
+
+    # Save to DB
+    if datatype == 'cbrawit':
+        # Normalisasi
+        DataNormalisasiCbRawit.objects.all().delete()
+        for i, x in enumerate(data_x_testing):
+            db = DataNormalisasiCbRawit()
+            db.no = str(i+1)
+            db.harga = x['harga']
+            db.produksi = x['produksi']
+            db.ketersediaan = x['ketersediaan']
+            db.permintaan = data_y_testing[i][0]
+            db.save()
+
+        # Weight
+        DataWeightCbRawit.objects.all().delete()
+        for i, x in enumerate(data_weight):
+            db = DataWeightCbRawit()
+            db.no = str(i + 1)
+            db.harga = x['harga']
+            db.produksi = x['produksi']
+            db.ketersediaan = x['ketersediaan']
+            db.save()
+
+        # Bias
+        DataBiasCbRawit.objects.all().delete()
+        for i, x in enumerate(data_bias):
+            db = DataBiasCbRawit()
+            db.no = str(i + 1)
+            db.bias = x
+            db.save()
+
+        # Output Weight
+        DataOutputWeightCbRawit.objects.all().delete()
+        for i, x in enumerate(data_output_weight):
+            db = DataOutputWeightCbRawit()
+            db.no = str(i + 1)
+            db.weight = x
+            db.save()
+
+    if datatype == 'cbmerah':
+        # Normalisasi
+        DataNormalisasiCbMerah.objects.all().delete()
+        for i, x in enumerate(data_x_testing):
+            db = DataNormalisasiCbMerah()
+            db.no = str(i+1)
+            db.harga = x['harga']
+            db.produksi = x['produksi']
+            db.ketersediaan = x['ketersediaan']
+            db.permintaan = data_y_testing[i][0]
+            db.save()
+
+        # Weight
+        DataWeightCbMerah.objects.all().delete()
+        for i, x in enumerate(data_weight):
+            db = DataWeightCbMerah()
+            db.no = str(i + 1)
+            db.harga = x['harga']
+            db.produksi = x['produksi']
+            db.ketersediaan = x['ketersediaan']
+            db.save()
+
+        # Bias
+        DataBiasCbMerah.objects.all().delete()
+        for i, x in enumerate(data_bias):
+            db = DataBiasCbMerah()
+            db.no = str(i + 1)
+            db.bias = x
+            db.save()
+
+        # Output Weight
+        DataOutputWeightCbMerah.objects.all().delete()
+        for i, x in enumerate(data_output_weight):
+            db = DataOutputWeightCbMerah()
+            db.no = str(i + 1)
+            db.weight = x
+            db.save()
 
     data_training = {
         'data_x_training': data_x_training,
@@ -132,6 +213,7 @@ def get_normalisasi(data_normalisasi, rasio_training, rasio_testing):
     data_y_testing = data_y[-data_testing_len:]
 
     print(data_x_testing)
+    print(data_y_testing)
 
     data_n = {
         'data_x_training': data_x_training,

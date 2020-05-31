@@ -18,7 +18,7 @@ from django.urls import path, include
 from home.views import \
     view_data_cbrawit, view_data_cbmerah, \
     view_normalisasi_cbmerah, view_normalisasi_cbrawit, \
-    view_training_cbrawit, view_training_cbmerah
+    view_training_cbrawit, view_training_cbmerah, view_testing_cbrawit, view_testing_cbmerah
 
 app_name = 'home'
 
@@ -41,4 +41,6 @@ urlpatterns = [
     path('proses-normalisasi-cbmerah/', view_normalisasi_cbmerah.IndexView.as_view(), name='normalisasi_cbmerah'),
     path('proses-training-cbrawit/', view_training_cbrawit.IndexView.as_view(), name='training_cbrawit'),
     path('proses-training-cbmerah/', view_training_cbmerah.IndexView.as_view(), name='training_cbmerah'),
+    path('proses-testing-cbrawit/', view_testing_cbrawit.IndexView.as_view(), name='testing_cbrawit'),
+    path('proses-testing-cbmerah/', view_testing_cbmerah.IndexView.as_view(), name='testing_cbmerah'),
 ]
