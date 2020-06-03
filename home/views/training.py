@@ -212,9 +212,6 @@ def get_normalisasi(data_normalisasi, rasio_training, rasio_testing):
     data_x_testing = data_x[-data_testing_len:]
     data_y_testing = data_y[-data_testing_len:]
 
-    print(data_x_testing)
-    print(data_y_testing)
-
     data_n = {
         'data_x_training': data_x_training,
         'data_y_training': data_y_training,

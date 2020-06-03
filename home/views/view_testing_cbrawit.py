@@ -6,6 +6,7 @@ class IndexView(ListView):
     context_object_name = 'data'
 
     def get_queryset(self):
+
         context = {
 
         }
