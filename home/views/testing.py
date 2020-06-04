@@ -44,12 +44,17 @@ def get_data_testing(datatype):
         db.save()
 
         # Denormalisasi
-        DataDenormalisasiCbRawit.objects.all().delete()
         for i, x in enumerate(data_denormalisasi):
-            db = DataDenormalisasiCbRawit()
-            db.no = str(i + 1)
-            db.denormalisasi = x
-            db.save()
+            no = str(i + 1)
+            db = DataDenormalisasiCbRawit.objects.filter(no=no)
+            if len(db) > 0:
+                data_d = db[0]
+            else:
+                data_d = DataDenormalisasiCbRawit()
+                data_d.no = no
+
+            data_d.denormalisasi = x
+            data_d.save()
 
     if datatype == 'cbmerah':
         # MSE
@@ -59,12 +64,17 @@ def get_data_testing(datatype):
         db.save()
 
         # Denormalisasi
-        DataDenormalisasiCbMerah.objects.all().delete()
         for i, x in enumerate(data_denormalisasi):
-            db = DataDenormalisasiCbMerah()
-            db.no = str(i + 1)
-            db.denormalisasi = x
-            db.save()
+            no = str(i + 1)
+            db = DataDenormalisasiCbMerah.objects.filter(no=no)
+            if len(db) > 0:
+                data_d = db[0]
+            else:
+                data_d = DataDenormalisasiCbMerah()
+                data_d.no = no
+
+            data_d.denormalisasi = x
+            data_d.save()
 
     data_testing = {
         'data_normalisasi_x': data_normalisasi_x,
@@ -227,7 +237,8 @@ def get_prediksi_y(datatype, data_h_eks):
                 else:
                     sm[k] = sm[k] + m
 
-        data_prediksi_y.append(sm[0])
+        if len(sm) > 0:
+            data_prediksi_y.append(sm[0])
 
     print(data_prediksi_y)
 
@@ -242,7 +253,9 @@ def get_mse(data_prediksi_y, data_normalisasi_y):
         n = math.pow((float(x) - float(data_normalisasi_y[i])), 2)
         data_mse.append(n)
 
-    mse = sum(data_mse) / len(data_prediksi_y)
+    mse = 0
+    if len(data_prediksi_y) > 0:
+        mse = sum(data_mse) / len(data_prediksi_y)
 
     return mse
 

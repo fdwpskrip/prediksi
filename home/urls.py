@@ -18,7 +18,8 @@ from django.urls import path, include
 from home.views import \
     view_data_cbrawit, view_data_cbmerah, \
     view_normalisasi_cbmerah, view_normalisasi_cbrawit, \
-    view_training_cbrawit, view_training_cbmerah, view_testing_cbrawit, view_testing_cbmerah
+    view_training_cbrawit, view_training_cbmerah, view_testing_cbrawit, view_testing_cbmerah, view_mse_cbmerah, \
+    view_mse_cbrawit, view_denormalisasi_cbmerah, view_denormalisasi_cbrawit
 
 app_name = 'home'
 
@@ -43,4 +44,8 @@ urlpatterns = [
     path('proses-training-cbmerah/', view_training_cbmerah.IndexView.as_view(), name='training_cbmerah'),
     path('proses-testing-cbrawit/', view_testing_cbrawit.IndexView.as_view(), name='testing_cbrawit'),
     path('proses-testing-cbmerah/', view_testing_cbmerah.IndexView.as_view(), name='testing_cbmerah'),
+    path('proses-mse-cbrawit/', view_mse_cbrawit.IndexView.as_view(), name='mse_cbrawit'),
+    path('proses-mse-cbmerah/', view_mse_cbmerah.IndexView.as_view(), name='mse_cbmerah'),
+    path('proses-denormalisasi-cbrawit/', view_denormalisasi_cbrawit.IndexView.as_view(), name='denormalisasi_cbrawit'),
+    path('proses-denormalisasi-cbmerah/', view_denormalisasi_cbmerah.IndexView.as_view(), name='denormalisasi_cbmerah'),
 ]

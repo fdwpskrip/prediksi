@@ -1,6 +1,6 @@
 from home.models import DataNormalisasiCbRawit, DataNormalisasiCbMerah, DataWeightCbRawit, DataWeightCbMerah, \
     DataBiasCbRawit, DataBiasCbMerah, DataOutputWeightCbRawit, DataOutputWeightCbMerah, DataMinMaxCbRawit, \
-    DataNewMinMaxCbRawit, DataMinMaxCbMerah, DataNewMinMaxCbMerah
+    DataNewMinMaxCbRawit, DataMinMaxCbMerah, DataNewMinMaxCbMerah, DataDenormalisasiCbRawit, DataDenormalisasiCbMerah
 from home.views import normalisasi
 import logging
 import math
@@ -20,6 +20,7 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
 
     listdata = data.get(datatype)
 
+    data_all = listdata['listdata']
     data_normalisasi = listdata['n_data']
     minvalue = listdata['min']
     maxvalue = listdata['max']
@@ -95,6 +96,15 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
 
     # Save to DB
     if datatype == 'cbrawit':
+        # Hasil Nyata
+        DataDenormalisasiCbRawit.objects.all().delete()
+        data_hasil = data_all[-rasio_data_testing.get(rasio):]
+        for i, x in enumerate(data_hasil):
+            db = DataDenormalisasiCbRawit()
+            db.no = str(i + 1)
+            db.hasil = x['permintaan']
+            db.save()
+
         # MinMax
         DataMinMaxCbRawit.objects.all().delete()
         for i, x in enumerate(data_minmax):
@@ -151,6 +161,15 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
             db.save()
 
     if datatype == 'cbmerah':
+        # Hasil Nyata
+        DataDenormalisasiCbMerah.objects.all().delete()
+        data_hasil = data_all[-rasio_data_testing.get(rasio):]
+        for i, x in enumerate(data_hasil):
+            db = DataDenormalisasiCbMerah()
+            db.no = str(i + 1)
+            db.hasil = x['permintaan']
+            db.save()
+
         # MinMax
         DataMinMaxCbMerah.objects.all().delete()
         for i, x in enumerate(data_minmax):

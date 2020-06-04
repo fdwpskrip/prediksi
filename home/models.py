@@ -170,6 +170,7 @@ class DataMseCbMerah(models.Model):
 class DataDenormalisasiCbRawit(models.Model):
     no = models.CharField("No", max_length=50, blank=True, null=True)
     denormalisasi = models.CharField("Denormalisasi", max_length=50, blank=True, null=True)
+    hasil = models.CharField("Hasil", max_length=50, blank=True, null=True)
     created_at = models.DateTimeField("Created At", auto_now_add=True)
 
     def __str__(self):
@@ -179,6 +180,7 @@ class DataDenormalisasiCbRawit(models.Model):
 class DataDenormalisasiCbMerah(models.Model):
     no = models.CharField("No", max_length=50, blank=True, null=True)
     denormalisasi = models.CharField("Denormalisasi", max_length=50, blank=True, null=True)
+    hasil = models.CharField("Hasil", max_length=50, blank=True, null=True)
     created_at = models.DateTimeField("Created At", auto_now_add=True)
 
     def __str__(self):

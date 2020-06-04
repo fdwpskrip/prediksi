@@ -25,9 +25,9 @@
                     </li>
                     <li role="presentation" class=""><a href="{% url 'home:testing_cbrawit' %}" role="tab" id="profile-tab2" aria-expanded="false">Proses Testing</a>
                     </li>
-                    <li role="presentation" class=""><a href="#" role="tab" id="profile-tab2" aria-expanded="false">Nilai MSE</a>
+                    <li role="presentation" class=""><a href="{% url 'home:mse_cbrawit' %}" role="tab" id="profile-tab2" aria-expanded="false">Nilai MSE</a>
                     </li>
-                    <li role="presentation" class=""><a href="#" role="tab" id="profile-tab2" aria-expanded="false">Denormalisasi</a>
+                    <li role="presentation" class=""><a href="{% url 'home:denormalisasi_cbrawit' %}" role="tab" id="profile-tab2" aria-expanded="false">Denormalisasi</a>
                     </li>
                     <li role="presentation" class=""><a href="#" role="tab" id="profile-tab2" aria-expanded="false">Hasil Prediksi</a>
                     </li>
@@ -38,12 +38,13 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h3><b>Input Parameter</b></h3>
+                    <h3><b>Proses Testing</b></h3>
                     <div class="clearfix"></div>
                 </div>
 
                 <form method="POST" novalidate>
-                    <button type="submit" class="btn btn-info pull-right" id="btn_proses_testing">Proses</button>
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-info" id="btn_proses_testing">Proses</button>
                 </form>
             </div>
         </div>
@@ -59,7 +60,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_content">
-                        <h2><b>X-Training</b></h2>
+                        <h2><b>X-Testing</b></h2>
                         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
@@ -70,7 +71,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for data_t in data.data_x_training %}
+                                {% for data_t in data.data_normalisasi_x %}
                                     <tr>
                                         <td align="center">
                                             {{ forloop.counter }}
@@ -89,7 +90,7 @@
                             </tbody>
                         </table>
                         <br>
-                        <h2><b>Y-Training</b></h2>
+                        <h2><b>Y-Testing</b></h2>
                         <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
@@ -98,43 +99,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for data_t in data.data_y_training %}
+                                {% for data_t in data.data_normalisasi_y %}
                                     <tr>
                                         <td align="center">
                                             {{ forloop.counter }}
                                         </td>
                                         <td>
-                                            {{ data_t.0 }}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        <br>
-                        <h2><b>Weight (W)</b></h2>
-                        <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th width="4%" style="text-align: center;">No</th>
-                                    <th width="20%">Harga</th>
-                                    <th width="20%">Produksi (KW)</th>
-                                    <th width="20%">Ketersediaan (TON)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for data_t in data.data_weight %}
-                                    <tr>
-                                        <td align="center">
-                                            {{ forloop.counter }}
-                                        </td>
-                                        <td>
-                                            {{ data_t.harga }}
-                                        </td>
-                                        <td>
-                                            {{ data_t.produksi }}
-                                        </td>
-                                        <td>
-                                            {{ data_t.ketersediaan }}
+                                            {{ data_t }}
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -178,7 +149,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for data_w in data.data_weight_transpose %}
+                                {% for data_w in data.data_w_transpose %}
                                     <tr>
                                         <td>
                                             {% if forloop.counter == 1 %}
@@ -285,58 +256,6 @@
                                 </tbody>
                             </table>
                             <br>
-                            <h2><b>H-Transpose</b></h2>
-                            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th width="20%" style="text-align: center;"></th>
-                                        {% for i in data.data_h_eks %}
-                                            <th width="20%">{{ forloop.counter }}</th>
-                                        {% endfor %}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for data_h in data.data_h_transpose %}
-                                        <tr>
-                                            <td align="center">
-                                                {{ forloop.counter }}
-                                            </td>
-                                            {% for x in data_h %}
-                                            <td>
-                                                {{ x }}
-                                            </td>
-                                            {% endfor %}
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <br>
-                            <h2><b>H-Matriks</b></h2>
-                            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th width="10%" style="text-align: center;"></th>
-                                        {% for i in data.data_h_transpose %}
-                                            <th width="20%">{{ forloop.counter }}</th>
-                                        {% endfor %}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for data_m in data.data_matriks_h %}
-                                        <tr>
-                                            <td align="center">
-                                                {{ forloop.counter }}
-                                            </td>
-                                            {% for x in data_m %}
-                                            <td>
-                                                {{ x }}
-                                            </td>
-                                            {% endfor %}
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <br>
                         </div>
                     </div>
                 </div>
@@ -344,98 +263,30 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h3><b>4. Menghitung matriks invers menggunakan OBE (Operasi Bilangan Elementer)</b></h3>
+                    <h3><b>4. Menghitung nilai Prediksi Y</b></h3>
                     <div class="clearfix"></div>
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_content">
-                            <h2><b>Matriks Invers</b></h2>
+                            <h2><b>Prediksi Y</b></h2>
                             <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th width="5%" style="text-align: center;"></th>
-                                        {% for i in data.data_matriks_h %}
-                                            <th width="20%">{{ forloop.counter }}</th>
-                                        {% endfor %}
+                                        <th width="4%" style="text-align: center;">No</th>
+                                        <th width="60%">Permintaan Cabai Rawit (TON)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for data_m in data.data_matriks_inv %}
+                                    {% for data_m in data.data_prediksi_y %}
                                         <tr>
                                             <td align="center">
                                                 {{ forloop.counter }}
                                             </td>
-                                            {% for x in data_m %}
                                             <td>
-                                                {{ x }}
+                                                {{ data_m }}
                                             </td>
-                                            {% endfor %}
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <br>
-                            <h2><b>Matriks Moore-Penrose</b></h2>
-                            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th width="5%" style="text-align: center;"></th>
-                                        {% for i in data.data_h_transpose %}
-                                            <th width="20%">{{ forloop.counter }}</th>
-                                        {% endfor %}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for data_m in data.data_matriks_mp %}
-                                        <tr>
-                                            <td align="center">
-                                                {{ forloop.counter }}
-                                            </td>
-                                            {% for x in data_m %}
-                                            <td>
-                                                {{ x }}
-                                            </td>
-                                            {% endfor %}
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="x_panel">
-                <div class="x_title">
-                    <h3><b>5. Menghitung bobot keluaran (output weight) untuk digunakan dalam proses testing</b></h3>
-                    <div class="clearfix"></div>
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_content">
-                            <h2><b>Output Weight</b></h2>
-                            <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th width="5%" style="text-align: center;"></th>
-                                        <th width="20%">Permintaan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for data_w in data.data_output_weight %}
-                                        <tr>
-                                            <td align="center">
-                                                {{ forloop.counter }}
-                                            </td>
-                                            {% for x in data_w %}
-                                            <td>
-                                                {{ x }}
-                                            </td>
-                                            {% endfor %}
                                         </tr>
                                     {% endfor %}
                                 </tbody>

@@ -65,11 +65,23 @@ def getnormalisasi(list_data):
     newmin = 0.1
     newmax = 0.9
 
+    n_data_all = []
     n_data = []
     n_harga = []
     n_produksi = []
     n_ketersediaan = []
     n_permintaan = []
+
+    for x in listdata:
+        data = {
+            'bulan': x.bulan,
+            'tahun': x.tahun,
+            'harga': x.harga,
+            'produksi': x.produksi,
+            'ketersediaan': x.ketersediaan,
+            'permintaan': x.permintaan
+        }
+        n_data_all.append(data)
 
     for x in listdata:
         data = {
@@ -106,6 +118,7 @@ def getnormalisasi(list_data):
         n_data[i]['permintaan'] = float(n)
 
     normalisasi = {
+        'listdata': n_data_all,
         'min': minvalue,
         'max': maxvalue,
         'newmin': newmin,
