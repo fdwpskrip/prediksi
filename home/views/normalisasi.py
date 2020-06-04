@@ -47,6 +47,7 @@ def getnormalisasi(list_data):
     listpermintaan = list_data['listpermintaan']
 
     minvalue = {
+        'type': 'Min',
         'harga': min([int(i) for i in listharga]),
         'produksi': min([float(i) for i in listproduksi]),
         'ketersediaan': min([float(i) for i in listketersediaan]),
@@ -54,6 +55,7 @@ def getnormalisasi(list_data):
     }
 
     maxvalue = {
+        'type': 'Max',
         'harga': max([int(i) for i in listharga]),
         'produksi': max([float(i) for i in listproduksi]),
         'ketersediaan': max([float(i) for i in listketersediaan]),

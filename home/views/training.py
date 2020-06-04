@@ -1,5 +1,6 @@
 from home.models import DataNormalisasiCbRawit, DataNormalisasiCbMerah, DataWeightCbRawit, DataWeightCbMerah, \
-    DataBiasCbRawit, DataBiasCbMerah, DataOutputWeightCbRawit, DataOutputWeightCbMerah
+    DataBiasCbRawit, DataBiasCbMerah, DataOutputWeightCbRawit, DataOutputWeightCbMerah, DataMinMaxCbRawit, \
+    DataNewMinMaxCbRawit, DataMinMaxCbMerah, DataNewMinMaxCbMerah
 from home.views import normalisasi
 import logging
 import math
@@ -13,11 +14,20 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
 
     # Data
     data = {
-        'cbrawit': normalisasi.getnormalisasi_cbrawit()['n_data'],
-        'cbmerah': normalisasi.getnormalisasi_cbmerah()['n_data']
+        'cbrawit': normalisasi.getnormalisasi_cbrawit(),
+        'cbmerah': normalisasi.getnormalisasi_cbmerah()
     }
 
-    data_normalisasi = data.get(datatype)
+    listdata = data.get(datatype)
+
+    data_normalisasi = listdata['n_data']
+    minvalue = listdata['min']
+    maxvalue = listdata['max']
+    newmin = listdata['newmin']
+    newmax = listdata['newmax']
+
+    data_minmax = [minvalue, maxvalue]
+
     data_size = len(data_normalisasi)
 
     rasio_data_training = {
@@ -85,6 +95,24 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
 
     # Save to DB
     if datatype == 'cbrawit':
+        # MinMax
+        DataMinMaxCbRawit.objects.all().delete()
+        for i, x in enumerate(data_minmax):
+            db = DataMinMaxCbRawit()
+            db.type = x['type']
+            db.harga = x['harga']
+            db.produksi = x['produksi']
+            db.ketersediaan = x['ketersediaan']
+            db.permintaan = x['permintaan']
+            db.save()
+
+        # NewMinMax
+        DataNewMinMaxCbRawit.objects.all().delete()
+        db = DataNewMinMaxCbRawit()
+        db.newmin = newmin
+        db.newmax = newmax
+        db.save()
+
         # Normalisasi
         DataNormalisasiCbRawit.objects.all().delete()
         for i, x in enumerate(data_x_testing):
@@ -123,6 +151,24 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
             db.save()
 
     if datatype == 'cbmerah':
+        # MinMax
+        DataMinMaxCbMerah.objects.all().delete()
+        for i, x in enumerate(data_minmax):
+            db = DataMinMaxCbMerah()
+            db.type = x['type']
+            db.harga = x['harga']
+            db.produksi = x['produksi']
+            db.ketersediaan = x['ketersediaan']
+            db.permintaan = x['permintaan']
+            db.save()
+
+        # NewMinMax
+        DataNewMinMaxCbMerah.objects.all().delete()
+        db = DataNewMinMaxCbMerah()
+        db.newmin = newmin
+        db.newmax = newmax
+        db.save()
+
         # Normalisasi
         DataNormalisasiCbMerah.objects.all().delete()
         for i, x in enumerate(data_x_testing):
@@ -422,6 +468,6 @@ def get_output_weight(data_matriks_mp, data_y_training):
                 else:
                     sm[k] = sm[k] + m
 
-        data_output_weight.append(sm)
+        data_output_weight.append(sm[0])
 
     return data_output_weight
