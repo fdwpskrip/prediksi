@@ -4,12 +4,11 @@
 
 <!-- page content -->
 <div class="right_col">
-    <div class="container">
-        <br/><br/><br/>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <br/>
         <legend>Tambah Data Cabai Merah</legend>
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
-
+        <div class="x_panel">
             <form method="post" novalidate>
                 {% csrf_token %}
                 {% for hidden_field in form.hidden_fields %}
@@ -26,7 +25,24 @@
                 {% endfor %}
                 <button type="submit" class="btn btn-primary">OK</button>
             </form>
-
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <strong>Import</strong> Data Excel
+            </div>
+            <div class="card-body card-block">
+                <form action="" method="post" class="form-inline" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row form-group">
+                        <div class="col-12 col-md-9">
+                            <input type="file" id="file-excel" name="file-excel" class="form-control-file">
+                        </div>
+                    </div>
+                    <input type="submit" name="input_excel" class="btn btn-primary btn-sm" value="SUBMIT">
+                </form>
+            </div>
         </div>
     </div>
 </div>
