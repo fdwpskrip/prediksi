@@ -74,6 +74,7 @@ def getnormalisasi(list_data):
 
     for x in listdata:
         data = {
+            'no': x.no,
             'bulan': x.bulan,
             'tahun': x.tahun,
             'harga': x.harga,
@@ -85,6 +86,7 @@ def getnormalisasi(list_data):
 
     for x in listdata:
         data = {
+            'no': x.no,
             'bulan': x.bulan,
             'tahun': x.tahun,
             'harga': 0,

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="row">
+
+        <div class="x_content"></div>
+            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="{% url 'home:data_cbmerah' %}" id="home-tab" role="tab" aria-expanded="true">Data</a>
+                    </li>
+                    <li role="presentation" class=""><a href="{% url 'home:normalisasi_cbmerah' %}" role="tab" id="profile-tab" aria-expanded="false">Parameter</a>
+                    </li>
+                    <li role="presentation" class=""><a href="{% url 'home:training_cbmerah' %}" role="tab" id="profile-tab2" aria-expanded="false">Proses Training</a>
+                    </li>
+                    <li role="presentation" class=""><a href="{% url 'home:testing_cbmerah' %}" role="tab" id="profile-tab2" aria-expanded="false">Proses Testing</a>
+                    </li>
+                    <li role="presentation" class=""><a href="{% url 'home:mse_cbmerah' %}" role="tab" id="profile-tab2" aria-expanded="false">Nilai MSE</a>
+                    </li>
+                    <li role="presentation" class=""><a href="{% url 'home:denormalisasi_cbmerah' %}" role="tab" id="profile-tab2" aria-expanded="false">Denormalisasi</a>
+                    </li>
+                    <li role="presentation" class=""><a href="#" role="tab" id="profile-tab2" aria-expanded="false">Hasil Prediksi</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h3><b>Mean Square Error (MSE)</b></h3>
+                    <div class="clearfix"></div>
+                </div>
+
+                <h4><b>{{ data.data_mse }}</b></h4>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /page content -->
+{% endblock %}

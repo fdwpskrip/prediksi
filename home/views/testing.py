@@ -3,7 +3,7 @@ import math
 from home.models import DataNormalisasiCbRawit, DataNormalisasiCbMerah, DataWeightCbRawit, DataWeightCbMerah, \
     DataBiasCbRawit, DataBiasCbMerah, DataOutputWeightCbRawit, DataOutputWeightCbMerah, DataMseCbRawit, DataMseCbMerah, \
     DataMinMaxCbRawit, DataMinMaxCbMerah, DataNewMinMaxCbRawit, DataNewMinMaxCbMerah, DataDenormalisasiCbRawit, \
-    DataDenormalisasiCbMerah
+    DataDenormalisasiCbMerah, DataCbRawit, DataCbMerah
 
 
 def get_data_testing(datatype):
@@ -33,7 +33,7 @@ def get_data_testing(datatype):
     data_mse = get_mse(data_prediksi_y, data_normalisasi_y)
 
     # Denormalisasi
-    data_denormalisasi = get_denormalisasi(datatype, data_prediksi_y)
+    data_denormalisasi = get_denormalisasi(datatype, data_prediksi_y, data_normalisasi_y)
 
     # Save to DB
     if datatype == 'cbrawit':
@@ -45,7 +45,7 @@ def get_data_testing(datatype):
 
         # Denormalisasi
         for i, x in enumerate(data_denormalisasi):
-            no = str(i + 1)
+            no = x['no']
             db = DataDenormalisasiCbRawit.objects.filter(no=no)
             if len(db) > 0:
                 data_d = db[0]
@@ -53,7 +53,7 @@ def get_data_testing(datatype):
                 data_d = DataDenormalisasiCbRawit()
                 data_d.no = no
 
-            data_d.denormalisasi = x
+            data_d.denormalisasi = x['denormalisasi']
             data_d.save()
 
     if datatype == 'cbmerah':
@@ -65,7 +65,7 @@ def get_data_testing(datatype):
 
         # Denormalisasi
         for i, x in enumerate(data_denormalisasi):
-            no = str(i + 1)
+            no = x['no']
             db = DataDenormalisasiCbMerah.objects.filter(no=no)
             if len(db) > 0:
                 data_d = db[0]
@@ -73,7 +73,7 @@ def get_data_testing(datatype):
                 data_d = DataDenormalisasiCbMerah()
                 data_d.no = no
 
-            data_d.denormalisasi = x
+            data_d.denormalisasi = x['denormalisasi']
             data_d.save()
 
     data_testing = {
@@ -107,11 +107,17 @@ def get_normalisasi(datatype):
             'produksi': x.produksi,
             'ketersediaan': x.ketersediaan
         }
-
-        data_y = float(x.permintaan)
-
         data_normalisasi_x.append(data_x)
-        data_normalisasi_y.append(data_y)
+
+        db = get_data_training(x.no, datatype)
+        if len(db) > 0:
+            data_y = {
+                'no': db[0].no,
+                'bulan': db[0].bulan,
+                'tahun': db[0].tahun,
+                'permintaan': x.permintaan
+            }
+            data_normalisasi_y.append(data_y)
 
     data_testing = {
         'data_normalisasi_x': data_normalisasi_x,
@@ -119,6 +125,14 @@ def get_normalisasi(datatype):
     }
 
     return data_testing
+
+
+def get_data_training(no, datatype):
+    dt = {
+        'cbrawit': DataCbRawit.objects.filter(no=no),
+        'cbmerah': DataCbMerah.objects.filter(no=no)
+    }
+    return dt.get(datatype)
 
 
 def get_w_transpose(datatype):
@@ -250,7 +264,7 @@ def get_mse(data_prediksi_y, data_normalisasi_y):
     data_mse = []
 
     for i, x in enumerate(data_prediksi_y):
-        n = math.pow((float(x) - float(data_normalisasi_y[i])), 2)
+        n = math.pow((float(x) - float(data_normalisasi_y[i]['permintaan'])), 2)
         data_mse.append(n)
 
     mse = 0
@@ -260,7 +274,7 @@ def get_mse(data_prediksi_y, data_normalisasi_y):
     return mse
 
 
-def get_denormalisasi(datatype, data_prediksi_y):
+def get_denormalisasi(datatype, data_prediksi_y, data_normalisasi_y):
 
     data_min = 0
     data_max = 0
@@ -289,6 +303,12 @@ def get_denormalisasi(datatype, data_prediksi_y):
     if data_newmax > 0 and data_newmin > 0:
         for i, x in enumerate(data_prediksi_y):
             n = (((float(x) - data_newmin) / (data_newmax - data_newmin)) * (data_max - data_min)) + data_min
-            data_denormalisasi.append(n)
+
+            data = {
+                'no': data_normalisasi_y[i]['no'],
+                'denormalisasi': n
+            }
+
+            data_denormalisasi.append(data)
 
     return data_denormalisasi

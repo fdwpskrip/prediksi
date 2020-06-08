@@ -101,8 +101,10 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
         data_hasil = data_all[-rasio_data_testing.get(rasio):]
         for i, x in enumerate(data_hasil):
             db = DataDenormalisasiCbRawit()
-            db.no = str(i + 1)
+            db.no = x['no']
             db.hasil = x['permintaan']
+            db.bulan = x['bulan']
+            db.tahun = x['tahun']
             db.save()
 
         # MinMax
@@ -127,7 +129,7 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
         DataNormalisasiCbRawit.objects.all().delete()
         for i, x in enumerate(data_x_testing):
             db = DataNormalisasiCbRawit()
-            db.no = str(i+1)
+            db.no = x['no']
             db.harga = x['harga']
             db.produksi = x['produksi']
             db.ketersediaan = x['ketersediaan']
@@ -166,8 +168,10 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
         data_hasil = data_all[-rasio_data_testing.get(rasio):]
         for i, x in enumerate(data_hasil):
             db = DataDenormalisasiCbMerah()
-            db.no = str(i + 1)
+            db.no = x['no']
             db.hasil = x['permintaan']
+            db.bulan = x['bulan']
+            db.tahun = x['tahun']
             db.save()
 
         # MinMax
@@ -192,7 +196,7 @@ def calculate_hinit(datatype, hidden_neuron, rasio):
         DataNormalisasiCbMerah.objects.all().delete()
         for i, x in enumerate(data_x_testing):
             db = DataNormalisasiCbMerah()
-            db.no = str(i+1)
+            db.no = x['no']
             db.harga = x['harga']
             db.produksi = x['produksi']
             db.ketersediaan = x['ketersediaan']
@@ -256,6 +260,7 @@ def get_normalisasi(data_normalisasi, rasio_training, rasio_testing):
 
     for dt in data_normalisasi:
         x = {
+            'no': dt['no'],
             'harga': dt['harga'],
             'produksi': dt['produksi'],
             'ketersediaan': dt['ketersediaan']
