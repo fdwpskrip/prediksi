@@ -26,7 +26,7 @@ class DataView(ListView):
 
 class DataDetailView(DetailView):
     model = DataCbRawit
-    template_name = 'data-detail.html'
+    template_name = 'data-detailcbrawit.html'
 
 
 def create(request):

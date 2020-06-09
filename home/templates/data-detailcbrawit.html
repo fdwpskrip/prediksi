@@ -5,39 +5,41 @@
 <div class="right_col">
     <div class="container">
         <br/>
-        <legend>Detail Data Cabai Rawit Bulan {{ data.bulan }}</legend>
+        <legend>Detail Data Cabai Rawit Bulan {{ datacbrawit.bulan }}</legend>
         <div class="content">
             <div class="form-group">
                 <label for="bulan">Bulan</label>
-                <p>{{ data.bulan }}</p>
+                <h4>{{ datacbrawit.bulan }}</h4>
             </div>
-
+            <br/>
             <div class="form-group">
                 <label for="bulan">Tahun</label>
-                <p>{{ data.tahun }}</p>
+                <h4>{{ datacbrawit.tahun }}</h4>
             </div>
-
+            <br/>
             <div class="form-group">
                 <label for="harga">Harga</label>
-                <p>{{ data.harga }}</p>
+                <h4>{{ datacbrawit.harga }}</h4>
             </div>
-
+            <br/>
             <div class="form-group">
                 <label for="produksi">Produksi (KW) </label>
-                <p>{{ data.produksi }}</p>
+                <h4>{{ datacbrawit.produksi }}</h4>
             </div>
-
+            <br/>
             <div class="form-group">
                 <label for="ketersediaan">Ketersediaan (TON) </label>
-                <p>{{ data.ketersediaan }}</p>
+                <h4>{{ datacbrawit.ketersediaan }}</h4>
             </div>
-
+            <br/>
             <div class="form-group">
                 <label for="permintaan">Permintaan (TON) </label>
-                <p>{{ data.permintaan }}</p>
+                <h4>{{ datacbrawit.permintaan }}</h4>
             </div>
         </div>
 
+        <br/>
+        <br/>
         <a href="{% url 'home:home_view' %}">
             <button type="button" class="btn btn-success">
                 Kembali
