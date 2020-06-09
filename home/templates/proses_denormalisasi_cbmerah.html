@@ -54,7 +54,7 @@
                         {% for data_d in data.data_denormalisasi %}
                             <tr>
                                 <td>
-                                    {{ data_d.no }}
+                                    {{ forloop.counter }}
                                 </td>
                                 <td>
                                     {{ data_d.denormalisasi }}

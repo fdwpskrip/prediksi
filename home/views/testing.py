@@ -306,7 +306,7 @@ def get_denormalisasi(datatype, data_prediksi_y, data_normalisasi_y):
 
             data = {
                 'no': data_normalisasi_y[i]['no'],
-                'denormalisasi': n
+                'denormalisasi': str(n)
             }
 
             data_denormalisasi.append(data)
