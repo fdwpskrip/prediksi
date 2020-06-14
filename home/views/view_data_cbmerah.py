@@ -67,7 +67,7 @@ def edit(request, pk, template_name='edit_cbmerah.html'):
     return render(request, template_name, {'form': form})
 
 
-def delete(request, pk, template_name='confirm_deletecbmerah.html'):
+def delete(request, pk, template_name='confirm_delete_cbmerah.html'):
     contact = get_object_or_404(DataCbMerah, pk=pk)
     if request.method == 'POST':
         contact.delete()

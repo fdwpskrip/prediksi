@@ -19,7 +19,7 @@ from home.views import \
     view_data_cbrawit, view_data_cbmerah, \
     view_normalisasi_cbmerah, view_normalisasi_cbrawit, \
     view_training_cbrawit, view_training_cbmerah, view_testing_cbrawit, view_testing_cbmerah, view_mse_cbmerah, \
-    view_mse_cbrawit, view_denormalisasi_cbmerah, view_denormalisasi_cbrawit
+    view_mse_cbrawit, view_denormalisasi_cbmerah, view_denormalisasi_cbrawit, view_chart_cbmerah, view_chart_cbrawit
 
 app_name = 'home'
 
@@ -48,4 +48,8 @@ urlpatterns = [
     path('proses-mse-cbmerah/', view_mse_cbmerah.IndexView.as_view(), name='mse_cbmerah'),
     path('proses-denormalisasi-cbrawit/', view_denormalisasi_cbrawit.IndexView.as_view(), name='denormalisasi_cbrawit'),
     path('proses-denormalisasi-cbmerah/', view_denormalisasi_cbmerah.IndexView.as_view(), name='denormalisasi_cbmerah'),
+    path('proses-chart-cbmerah/', view_chart_cbmerah.IndexView.as_view(), name='chart_cbmerah'),
+    path('proses-chart-cbrawit/', view_chart_cbrawit.IndexView.as_view(), name='chart_cbrawit'),
+    path('proses-data-chart-cbmerah/', view_chart_cbmerah.get_chart, name='data_chart_cbmerah'),
+    path('proses-data-chart-cbrawit/', view_chart_cbrawit.get_chart, name='data_chart_cbrawit'),
 ]

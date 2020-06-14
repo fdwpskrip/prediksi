@@ -58,7 +58,7 @@ def create(request):
     return render(request, 'create_cbrawit.html', {'form': form})
 
 
-def edit(request, pk, template_name='edit.html'):
+def edit(request, pk, template_name='edit_cbrawit.html'):
     data = get_object_or_404(DataCbRawit, pk=pk)
     form = DataCbRawitForm(request.POST or None, instance=data)
     if form.is_valid():
@@ -67,7 +67,7 @@ def edit(request, pk, template_name='edit.html'):
     return render(request, template_name, {'form': form})
 
 
-def delete(request, pk, template_name='confirm_delete.html'):
+def delete(request, pk, template_name='confirm_delete_cbrawit.html'):
     contact = get_object_or_404(DataCbRawit, pk=pk)
     if request.method == 'POST':
         contact.delete()

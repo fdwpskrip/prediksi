@@ -1,17 +1,17 @@
 from django.http import JsonResponse
 from django.views.generic import ListView
 
-from home.models import DataDenormalisasiCbMerah
+from home.models import DataDenormalisasiCbRawit
 
 
 class IndexView(ListView):
-    model = DataDenormalisasiCbMerah
-    template_name = 'proses_chart_cbmerah.html'
+    model = DataDenormalisasiCbRawit
+    template_name = 'proses_chart_cbrawit.html'
 
 
 def get_chart(request):
 
-    db = DataDenormalisasiCbMerah.objects.all()
+    db = DataDenormalisasiCbRawit.objects.all()
 
     labels = []
     data1 = []

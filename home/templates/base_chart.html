@@ -133,8 +133,8 @@
 
     <!-- </div> -->
 
-    <!-- jQuery -->
-    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!--&lt;!&ndash; jQuery &ndash;&gt;
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>-->
     <!-- Bootstrap -->
     <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <!--&lt;!&ndash; Chart &ndash;&gt;
@@ -164,7 +164,9 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{% static 'build/js/custom.min.js' %}"></script>
-
+    <script src="{% static 'app/jquery.js' %}"></script>
+    <script src="{% static 'app/chart.js' %}"></script>
+    <script src="{% static 'app/chartcb.js' %}"></script>
     <script src="{% static 'app/script.js' %}"></script>
 
   </body>
