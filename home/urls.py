@@ -19,11 +19,19 @@ from home.views import \
     view_data_cbrawit, view_data_cbmerah, \
     view_normalisasi_cbmerah, view_normalisasi_cbrawit, \
     view_training_cbrawit, view_training_cbmerah, view_testing_cbrawit, view_testing_cbmerah, view_mse_cbmerah, \
-    view_mse_cbrawit, view_denormalisasi_cbmerah, view_denormalisasi_cbrawit, view_chart_cbmerah, view_chart_cbrawit
+    view_mse_cbrawit, view_denormalisasi_cbmerah, view_denormalisasi_cbrawit, view_chart_cbmerah, view_chart_cbrawit, \
+    view_data_user
 
 app_name = 'home'
 
 urlpatterns = [
+    path('data-user/', view_data_user.IndexView.as_view(), name='data-user'),
+    path('detail-user/<int:pk>/', view_data_user.detail, name='detail-user'),
+    path('edit-user/<int:pk>/', view_data_user.edit, name='edit-user'),
+    path('create-user/', view_data_user.create, name='create-user'),
+    path('delete-user/<int:pk>/', view_data_user.delete, name='delete-user'),
+    path('logout', view_data_user.logout_view, name='logout'),
+
     path('data-cbrawit/', view_data_cbrawit.IndexView.as_view(), name='home_view'),
     path('detail-cbrawit/<int:pk>/', view_data_cbrawit.DataDetailView.as_view(), name='detail'),
     path('edit-cabairawit/<int:pk>/', view_data_cbrawit.edit, name='edit'),

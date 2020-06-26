@@ -6,42 +6,37 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="container">
-                <legend>Detail Data Cabai Merah Bulan {{ datacbmerah.bulan }}</legend>
+                <legend>Detail Data User</legend>
                 <div class="content">
                     <div class="form-group">
-                        <label for="bulan">Bulan</label>
-                        <h4>{{ datacbmerah.bulan }}</h4>
+                        <label>Username</label>
+                        <h4>{{ profile.username }}</h4>
                     </div>
                     <br/>
                     <div class="form-group">
-                        <label for="bulan">Tahun</label>
-                        <h4>{{ datacbmerah.tahun }}</h4>
+                        <label>First Name</label>
+                        <h4>{{ profile.first_name }}</h4>
                     </div>
                     <br/>
                     <div class="form-group">
-                        <label for="harga">Harga</label>
-                        <h4>{{ datacbmerah.harga }}</h4>
+                        <label>Last Name</label>
+                        <h4>{{ profile.last_name }}</h4>
                     </div>
                     <br/>
                     <div class="form-group">
-                        <label for="produksi">Produksi (KW) </label>
-                        <h4>{{ datacbmerah.produksi }}</h4>
+                        <label>Email</label>
+                        <h4>{{ profile.email }}</h4>
                     </div>
                     <br/>
                     <div class="form-group">
-                        <label for="ketersediaan">Ketersediaan (TON) </label>
-                        <h4>{{ datacbmerah.ketersediaan }}</h4>
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <label for="permintaan">Permintaan (TON) </label>
-                        <h4>{{ datacbmerah.permintaan }}</h4>
+                        <label>Status</label>
+                        <h4>{{ profile.status }}</h4>
                     </div>
                 </div>
 
                 <br/>
                 <br/>
-                <a href="{% url 'home:homeview_cbmerah' %}">
+                <a href="{% url 'home:data-user' %}">
                     <button type="button" class="btn btn-success">
                         Kembali
                     </button>

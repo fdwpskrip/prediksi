@@ -3,48 +3,51 @@
 
 <!-- page content -->
 <div class="right_col">
-    <div class="container">
-        <br/>
-        <legend>Detail Data Cabai Rawit Bulan {{ datacbrawit.bulan }}</legend>
-        <div class="content">
-            <div class="form-group">
-                <label for="bulan">Bulan</label>
-                <h4>{{ datacbrawit.bulan }}</h4>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="bulan">Tahun</label>
-                <h4>{{ datacbrawit.tahun }}</h4>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="harga">Harga</label>
-                <h4>{{ datacbrawit.harga }}</h4>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="produksi">Produksi (KW) </label>
-                <h4>{{ datacbrawit.produksi }}</h4>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="ketersediaan">Ketersediaan (TON) </label>
-                <h4>{{ datacbrawit.ketersediaan }}</h4>
-            </div>
-            <br/>
-            <div class="form-group">
-                <label for="permintaan">Permintaan (TON) </label>
-                <h4>{{ datacbrawit.permintaan }}</h4>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="container">
+                <legend>Detail Data Cabai Rawit Bulan {{ datacbrawit.bulan }}</legend>
+                <div class="content">
+                    <div class="form-group">
+                        <label for="bulan">Bulan</label>
+                        <h4>{{ datacbrawit.bulan }}</h4>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="bulan">Tahun</label>
+                        <h4>{{ datacbrawit.tahun }}</h4>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <h4>{{ datacbrawit.harga }}</h4>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="produksi">Produksi (KW) </label>
+                        <h4>{{ datacbrawit.produksi }}</h4>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="ketersediaan">Ketersediaan (TON) </label>
+                        <h4>{{ datacbrawit.ketersediaan }}</h4>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="permintaan">Permintaan (TON) </label>
+                        <h4>{{ datacbrawit.permintaan }}</h4>
+                    </div>
+                </div>
+
+                <br/>
+                <br/>
+                <a href="{% url 'home:home_view' %}">
+                    <button type="button" class="btn btn-success">
+                        Kembali
+                    </button>
+                </a>
             </div>
         </div>
-
-        <br/>
-        <br/>
-        <a href="{% url 'home:home_view' %}">
-            <button type="button" class="btn btn-success">
-                Kembali
-            </button>
-        </a>
     </div>
 </div>
 <!-- /page content -->
