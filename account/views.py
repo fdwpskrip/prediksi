@@ -70,7 +70,7 @@ def signup_view(request):
                     request.session['status'] = db[0].status
                     request.session['email'] = db[0].email
 
-                return redirect('home:index')
+                return redirect('home:home_view')
 
     form = SignUpFormUser()
     return render(request, 'signup.html', {'form': form})
