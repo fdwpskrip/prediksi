@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 {% load static %}
+{% load widget_tweaks %}
 
 <html>
 <head>
@@ -23,7 +24,7 @@
 
                 {% for field in form %}
 
-                    {{ field }}
+                    {{ field}}
 
                     {% if field.help_text %}
                         <small style="color: grey">{{ field.help_text }}</small>
