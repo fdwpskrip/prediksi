@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <center><h2>SISTEM PREDIKSI PERMINTAAN KEBUTUHAN CABAI DI KOTA BATU </h2></center>
+                    <div class="clearfix"></div>
+                </div>
+                
+
+                <!-- <div class="x_content">
+                    {% if request.session.status == '1' %}
+                    <div class="au-card">
+                    <li>Masukkan data training pada Menu Data Training</li>
+                    <li>Masukkan parameter pada Menu Proses Training</li>
+                    <li>Masukkan data testing pada Menu Data Testing</li>
+                    <li>Lihat hasil klasifikasi dan akurasi pada Menu Diagnosis</li>
+                    </div>
+                    {% endif %}
+                    {% if request.session.status == '2' %}
+                    <div class="au-card">
+                    <b>CARA PENGGUNAAN SISTEM</b>
+                    <li>Masukkan data testing pada Menu Data Testing</li>
+                    <li>Hasil Klasifikasi dapat dilihat pada Menu Diagnosis</li>
+                    </div>
+                    {% endif %}
+                </div> -->
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>CARA PENGGUNAAN SISTEM</h2>
+                    <div class="clearfix"></div>
+                </div>
+                
+
+                <div class="x_content">
+                    {% if request.session.status == '1' %}
+                    <div class="au-card">
+                    <li>Masukkan data cabai (cabai rawit dan cabai merah besar)</li>
+                    <li>Masukkan parameter pada Menu Proses Training</li>
+                    <li>Parameter yang dimasukkan yaitu jumlah hidden neuron dan perbandingan rasio data</li>
+                    <li>Klik button proses pada menu testing untuk melihat proses testing</li>
+                    <li>Lihat hasil prediksi pada menu hasil prediksi</li>
+                    </div>
+                    {% endif %}
+                    {% if request.session.status == '2' %}
+                    <div class="au-card">
+                    <b>CARA PENGGUNAAN SISTEM</b>
+                    <li>Masukkan data cabai (cabai rawit dan cabai merah besar)</li>
+                    <li>Lihat hasil prediksi pada menu hasil prediksi</li>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /page content -->
+
+{% endblock %}

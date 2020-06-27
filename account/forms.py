@@ -8,7 +8,7 @@ from account.models import Profile
 STATUS_CHOICES = (
         ('', '--Pilih Status--'),
         (True, 'ADMIN'),
-        (False, 'PIMPINAN')
+        (False, 'PEGAWAI')
     )
 
 

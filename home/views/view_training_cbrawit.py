@@ -26,8 +26,8 @@ class IndexView(ListView):
             'data_matriks_inv': [],
             'data_matriks_mp': [],
             'data_output_weight': [],
-            'rasio_data_training': '(otomatis terisi jumlah data training)',
-            'rasio_data_testing': '(otomatis terisi jumlah data testing)',
+            'rasio_data_training': 0,
+            'rasio_data_testing': 0,
             'display': 'none',
             'form': form
         }
@@ -82,8 +82,8 @@ class IndexView(ListView):
                 'data_matriks_inv': [],
                 'data_matriks_mp': [],
                 'data_output_weight': [],
-                'rasio_data_training': '(otomatis terisi jumlah data training)',
-                'rasio_data_testing': '(otomatis terisi jumlah data testing)',
+                'rasio_data_training': 0,
+                'rasio_data_testing': 0,
                 'display': 'none',
                 'form': form
             }

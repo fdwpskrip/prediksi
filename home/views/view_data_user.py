@@ -18,7 +18,7 @@ class IndexView(ListView):
 
         status = {
             '1': 'Admin',
-            '2': 'Pimpinan'
+            '2': 'Pegawai'
         }
 
         for x in db:
@@ -45,7 +45,7 @@ def detail(request, pk, template_name='home_data_user_detail.html'):
     if db is not None:
         status = {
             '1': 'Admin',
-            '2': 'Pimpinan'
+            '2': 'Pegawai'
         }
         profile = {
             'username': db.username,
@@ -135,3 +135,8 @@ def logout_view(request):
     logout(request)
     return redirect('/account/login/')
 
+def dashboard(request):
+    if 'username' in request.session:
+        return render(request, 'home_dashboard.html', {})
+    else:
+        return redirect('/account/login/')

@@ -32,6 +32,8 @@ urlpatterns = [
     path('delete-user/<int:pk>/', view_data_user.delete, name='delete-user'),
     path('logout', view_data_user.logout_view, name='logout'),
 
+    path('dashboard/', view_data_user.dashboard, name='dashboard'),
+
     path('data-cbrawit/', view_data_cbrawit.IndexView.as_view(), name='home_view'),
     path('detail-cbrawit/<int:pk>/', view_data_cbrawit.DataDetailView.as_view(), name='detail'),
     path('edit-cabairawit/<int:pk>/', view_data_cbrawit.edit, name='edit'),
