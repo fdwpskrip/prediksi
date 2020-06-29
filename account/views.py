@@ -35,7 +35,7 @@ def login_view(request):
                         request.session['status'] = status
                         request.session['email'] = db[0].email
 
-                    return redirect('home:index')
+                    return redirect('home:dashboard')
             else:
                 messages.error(request, 'username or password incorrect')
                 return redirect('login_view')
@@ -79,7 +79,7 @@ def signup_view(request):
                     request.session['status'] = status
                     request.session['email'] = db[0].email
 
-                return redirect('home:index')
+                return redirect('home:dashboard')
 
     form = SignUpFormUser()
     return render(request, 'signup.html', {'form': form})
