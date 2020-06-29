@@ -198,6 +198,7 @@ class DataTestingCbRawit(models.Model):
     harga = models.CharField("Harga", max_length=50, blank=True, null=True)
     produksi = models.CharField("Produksi (KW)", max_length=50, blank=True, null=True)
     ketersediaan = models.CharField("Ketersediaan (TON)", max_length=50, blank=True, null=True)
+    prediksi = models.CharField("Prediksi", max_length=50, blank=True, null=True)
     created_at = models.DateTimeField("Created At", auto_now_add=True)
 
     def __str__(self):
@@ -209,6 +210,7 @@ class DataTestingCbMerah(models.Model):
     harga = models.CharField("Harga", max_length=50, blank=True, null=True)
     produksi = models.CharField("Produksi (KW)", max_length=50, blank=True, null=True)
     ketersediaan = models.CharField("Ketersediaan (TON)", max_length=50, blank=True, null=True)
+    prediksi = models.CharField("Prediksi", max_length=50, blank=True, null=True)
     created_at = models.DateTimeField("Created At", auto_now_add=True)
 
     def __str__(self):

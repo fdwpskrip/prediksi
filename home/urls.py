@@ -64,7 +64,11 @@ urlpatterns = [
     path('proses-data-chart-cbrawit/', view_chart_cbrawit.get_chart, name='data_chart_cbrawit'),
 
     path('proses-testing-prediksi-cbrawit/', view_testing_prediksi_cbrawit.IndexView.as_view(), name='prediksi_cbrawit'),
+    path('proses-testing-prediksi-cbrawit/<int:pk>/', view_testing_prediksi_cbrawit.DataDetailView.as_view(), name='detail_prediksi_cbrawit'),
     path('proses-testing-prediksi-cbrawit-create/', view_testing_prediksi_cbrawit.create, name='create_prediksi_cbrawit'),
+    path('proses-testing-prediksi-cbrawit-edit/<int:pk>/', view_testing_prediksi_cbrawit.edit, name='edit_prediksi_cbrawit'),
     path('proses-testing-prediksi-cbmerah/', view_testing_prediksi_cbmerah.IndexView.as_view(), name='prediksi_cbmerah'),
+    path('proses-testing-prediksi-cbmerah/<int:pk>/', view_testing_prediksi_cbmerah.DataDetailView.as_view(), name='detail_prediksi_cbmerah'),
     path('proses-testing-prediksi-cbmerah-create/', view_testing_prediksi_cbmerah.create, name='create_prediksi_cbmerah'),
+    path('proses-testing-prediksi-cbmerah-edit/<int:pk>/', view_testing_prediksi_cbmerah.edit, name='edit_prediksi_cbmerah'),
 ]

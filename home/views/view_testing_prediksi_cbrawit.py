@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic import ListView, DetailView
 
-from home.models import DataCbMerah, DataTestingCbRawit
-from home.forms import DataCbMerahForm, DataTestingCbRawitForm
+from home.models import DataTestingCbRawit
+from home.forms import DataTestingCbRawitForm
 
 
 class IndexView(ListView):
@@ -12,6 +11,11 @@ class IndexView(ListView):
 
     def get_queryset(self):
         return DataTestingCbRawit.objects.all()
+
+
+class DataDetailView(DetailView):
+    model = DataTestingCbRawit
+    template_name = 'proses_prediksi_detail_cbrawit.html'
 
 
 def create(request):
@@ -24,3 +28,12 @@ def create(request):
             return redirect('home:prediksi_cbrawit')
 
     return render(request, 'proses_predisksi_create_cbrawit.html', {'form': form})
+
+
+def edit(request, pk, template_name='edit_cbrawit.html'):
+    data = get_object_or_404(DataTestingCbRawit, pk=pk)
+    form = DataTestingCbRawitForm(request.POST or None, instance=data)
+    if form.is_valid():
+        form.save()
+        return redirect('home:prediksi_cbrawit')
+    return render(request, template_name, {'form': form})

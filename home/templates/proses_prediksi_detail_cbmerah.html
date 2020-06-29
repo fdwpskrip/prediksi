@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- page content -->
+<div class="right_col">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="container">
+                <legend>Detail Data Cabai Merah</legend>
+                <div class="content">
+                    <div class="form-group">
+                        <label for="no">No</label>
+                        <h4>{{ datatestingcbmerah.no }}</h4>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <h4>{{ datatestingcbmerah.harga }}</h4>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="produksi">Produksi (KW) </label>
+                        <h4>{{ datatestingcbmerah.produksi }}</h4>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="ketersediaan">Ketersediaan (TON) </label>
+                        <h4>{{ datatestingcbmerah.ketersediaan }}</h4>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="prediksi">Prediksi </label>
+                        <h4>{{ datatestingcbmerah.prediksi }}</h4>
+                    </div>
+                </div>
+
+                <br/>
+                <br/>
+                <a href="{% url 'home:prediksi_cbmerah' %}">
+                    <button type="button" class="btn btn-success">
+                        Kembali
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+
+{% endblock %}

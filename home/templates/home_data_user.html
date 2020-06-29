@@ -43,9 +43,11 @@
                                 <a href="{% url 'home:edit-user' data.pk %}">
                                     <button type="button" class="btn btn-success">Edit</button>
                                 </a>
+                                {% if request.session.id != data.pk %}
                                 <a href="{% url 'home:delete-user' data.pk %}">
                                     <button type="button" class="btn btn-danger">Hapus</button>
                                 </a>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
