@@ -26,7 +26,7 @@ class DataCbRawitForm(forms.ModelForm):
 class DataTestingCbRawitForm(forms.ModelForm):
     class Meta:
         model = DataTestingCbRawit
-        fields = "__all__"
+        fields = ['no', 'bulan', 'tahun', 'harga', 'produksi', 'ketersediaan', 'permintaan']
 
 
 class DataCbMerahForm(forms.ModelForm):
@@ -38,7 +38,7 @@ class DataCbMerahForm(forms.ModelForm):
 class DataTestingCbMerahForm(forms.ModelForm):
     class Meta:
         model = DataTestingCbMerah
-        fields = "__all__"
+        fields = ['no', 'bulan', 'tahun', 'harga', 'produksi', 'ketersediaan', 'permintaan']
 
 
 class DataForm(forms.ModelForm):

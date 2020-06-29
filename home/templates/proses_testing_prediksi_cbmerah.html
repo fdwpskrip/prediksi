@@ -53,7 +53,6 @@
                             <th width="20%">Produksi (KW)</th>
                             <th width="20%">Ketersediaan (TON)</th>
                             <th width="20%">Prediksi</th>
-                            <th width="20%">
                             <th width="20%"><a class="btn btn-primary" href="{% url 'home:create_prediksi_cbmerah' %}">Tambah</a></th>
                         </tr>
                         </thead>
@@ -61,11 +60,11 @@
                         <tbody>
                         {% for data in data_list %}
                         <tr>
-                            <td><a href="{% url 'home:detail_prediksi_cbmerah' data.pk %}"><center>{{ forloop.counter }}</center></a></td>
+                            <td><a href="{% url 'home:detail_prediksi_cbmerah' data.pk %}"><center>{{ data.no }}</center></a></td>
                             <td>{{ data.harga }}</td>
                             <td>{{ data.produksi }}</td>
                             <td>{{ data.ketersediaan }}</td>
-                            <td>{{ data.prediksi }}</td>
+                            <td>{{ data.permintaan }}</td>
                             <td>
                                 <a href="{% url 'home:edit_prediksi_cbmerah' data.pk %}">
                                     <button type="button" class="btn btn-success">Edit</button>

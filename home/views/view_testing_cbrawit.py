@@ -27,7 +27,7 @@ class IndexView(ListView):
     # Handle POST HTTP requests
     def post(self, request, *args, **kwargs):
 
-        data_testing = testing.get_data_testing('cbrawit')
+        data_testing = testing.get_data_testing('cbrawit', 'testing')
 
         data_normalisasi_x = data_testing['data_normalisasi_x']
         data_normalisasi_y = data_testing['data_normalisasi_y']

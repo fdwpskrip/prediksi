@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView
 
 from home.models import DataTestingCbRawit
 from home.forms import DataTestingCbRawitForm
+from home.views import prediksi
 
 
 class IndexView(ListView):
@@ -19,12 +20,17 @@ class DataDetailView(DetailView):
 
 
 def create(request):
-    form = DataTestingCbRawitForm()
+    form = DataTestingCbRawitForm(initial={"permintaan": "0"})
 
     if request.method == 'POST':
         form = DataTestingCbRawitForm(request.POST)
         if form.is_valid():
+            form.fields['permintaan'].initial = 0
             form.save()
+
+            # Prediksi
+            prediksi.get_data_testing('cbrawit')
+
             return redirect('home:prediksi_cbrawit')
 
     return render(request, 'proses_predisksi_create_cbrawit.html', {'form': form})
@@ -32,8 +38,12 @@ def create(request):
 
 def edit(request, pk, template_name='edit_cbrawit.html'):
     data = get_object_or_404(DataTestingCbRawit, pk=pk)
-    form = DataTestingCbRawitForm(request.POST or None, instance=data)
+    form = DataTestingCbRawitForm(request.POST or None, instance=data, initial={"permintaan": "0"})
     if form.is_valid():
         form.save()
+
+        # Prediksi
+        prediksi.get_data_testing('cbrawit')
+
         return redirect('home:prediksi_cbrawit')
     return render(request, template_name, {'form': form})

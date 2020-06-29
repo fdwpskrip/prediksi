@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView
 
 from home.models import DataTestingCbMerah
 from home.forms import DataTestingCbMerahForm
+from home.views import prediksi
 
 
 class IndexView(ListView):
@@ -25,6 +26,10 @@ def create(request):
         form = DataTestingCbMerahForm(request.POST)
         if form.is_valid():
             form.save()
+
+            # Prediksi
+            prediksi.get_data_testing('cbmerah')
+
             return redirect('home:prediksi_cbmerah')
 
     return render(request, 'proses_predisksi_create_cbmerah.html', {'form': form})
@@ -35,5 +40,9 @@ def edit(request, pk, template_name='edit_cbmerah.html'):
     form = DataTestingCbMerahForm(request.POST or None, instance=data)
     if form.is_valid():
         form.save()
+
+        # Prediksi
+        prediksi.get_data_testing('cbmerah')
+
         return redirect('home:prediksi_cbmerah')
     return render(request, template_name, {'form': form})

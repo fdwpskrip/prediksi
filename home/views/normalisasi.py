@@ -1,4 +1,4 @@
-from home.models import DataCbRawit
+from home.models import DataCbRawit, DataTestingCbRawit, DataTestingCbMerah
 from home.models import DataCbMerah
 
 
@@ -26,6 +26,42 @@ def getnormalisasi_cbmerah():
     listproduksi = DataCbMerah.objects.values_list('produksi', flat=True)
     listketersediaan = DataCbMerah.objects.values_list('ketersediaan', flat=True)
     listpermintaan = DataCbMerah.objects.values_list('permintaan', flat=True)
+
+    data_cbmerah = {
+        'listdata': listdata,
+        'listharga': listharga,
+        'listproduksi': listproduksi,
+        'listketersediaan': listketersediaan,
+        'listpermintaan': listpermintaan
+    }
+
+    return getnormalisasi(data_cbmerah)
+
+
+def getnormalisasi_prediksi_cbrawit():
+    listdata = DataTestingCbRawit.objects.all()
+    listharga = DataTestingCbRawit.objects.values_list('harga', flat=True)
+    listproduksi = DataTestingCbRawit.objects.values_list('produksi', flat=True)
+    listketersediaan = DataTestingCbRawit.objects.values_list('ketersediaan', flat=True)
+    listpermintaan = DataTestingCbRawit.objects.values_list('permintaan', flat=True)
+
+    data_cbrawit = {
+        'listdata': listdata,
+        'listharga': listharga,
+        'listproduksi': listproduksi,
+        'listketersediaan': listketersediaan,
+        'listpermintaan': listpermintaan
+    }
+
+    return getnormalisasi(data_cbrawit)
+
+
+def getnormalisasi_prediksi_cbmerah():
+    listdata = DataTestingCbMerah.objects.all()
+    listharga = DataTestingCbMerah.objects.values_list('harga', flat=True)
+    listproduksi = DataTestingCbMerah.objects.values_list('produksi', flat=True)
+    listketersediaan = DataTestingCbMerah.objects.values_list('ketersediaan', flat=True)
+    listpermintaan = DataTestingCbMerah.objects.values_list('permintaan', flat=True)
 
     data_cbmerah = {
         'listdata': listdata,
@@ -97,27 +133,32 @@ def getnormalisasi(list_data):
         n_data.append(data)
 
     for i, x in enumerate(listharga):
-        n = (((int(x) - minvalue['harga']) * (newmax - newmin)) / (maxvalue['harga'] - minvalue['harga'])) + newmin
-        n_harga.append(n)
-        n_data[i]['harga'] = float(n)
+        minmax = maxvalue['harga'] - minvalue['harga']
+        if minmax > 0:
+            n = (((int(x) - minvalue['harga']) * (newmax - newmin)) / minmax) + newmin
+            n_harga.append(n)
+            n_data[i]['harga'] = float(n)
 
     for i, x in enumerate(listproduksi):
-        n = (((float(x) - minvalue['produksi']) * (newmax - newmin)) / (
-                    maxvalue['produksi'] - minvalue['produksi'])) + newmin
-        n_produksi.append(n)
-        n_data[i]['produksi'] = float(n)
+        minmax = maxvalue['produksi'] - minvalue['produksi']
+        if minmax > 0:
+            n = (((float(x) - minvalue['produksi']) * (newmax - newmin)) / minmax) + newmin
+            n_produksi.append(n)
+            n_data[i]['produksi'] = float(n)
 
     for i, x in enumerate(listketersediaan):
-        n = (((float(x) - minvalue['ketersediaan']) * (newmax - newmin)) / (
-                    maxvalue['ketersediaan'] - minvalue['ketersediaan'])) + newmin
-        n_ketersediaan.append(n)
-        n_data[i]['ketersediaan'] = float(n)
+        minmax = maxvalue['ketersediaan'] - minvalue['ketersediaan']
+        if minmax > 0:
+            n = (((float(x) - minvalue['ketersediaan']) * (newmax - newmin)) / minmax) + newmin
+            n_ketersediaan.append(n)
+            n_data[i]['ketersediaan'] = float(n)
 
     for i, x in enumerate(listpermintaan):
-        n = (((float(x) - minvalue['permintaan']) * (newmax - newmin)) / (
-                    maxvalue['permintaan'] - minvalue['permintaan'])) + newmin
-        n_permintaan.append(n)
-        n_data[i]['permintaan'] = float(n)
+        minmax = maxvalue['permintaan'] - minvalue['permintaan']
+        if minmax > 0:
+            n = (((float(x) - minvalue['permintaan']) * (newmax - newmin)) / minmax) + newmin
+            n_permintaan.append(n)
+            n_data[i]['permintaan'] = float(n)
 
     normalisasi = {
         'listdata': n_data_all,
