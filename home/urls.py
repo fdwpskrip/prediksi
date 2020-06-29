@@ -20,7 +20,7 @@ from home.views import \
     view_normalisasi_cbmerah, view_normalisasi_cbrawit, \
     view_training_cbrawit, view_training_cbmerah, view_testing_cbrawit, view_testing_cbmerah, view_mse_cbmerah, \
     view_mse_cbrawit, view_denormalisasi_cbmerah, view_denormalisasi_cbrawit, view_chart_cbmerah, view_chart_cbrawit, \
-    view_data_user
+    view_data_user, view_testing_prediksi_cbrawit, view_testing_prediksi_cbmerah
 
 app_name = 'home'
 
@@ -62,4 +62,9 @@ urlpatterns = [
     path('proses-chart-cbrawit/', view_chart_cbrawit.IndexView.as_view(), name='chart_cbrawit'),
     path('proses-data-chart-cbmerah/', view_chart_cbmerah.get_chart, name='data_chart_cbmerah'),
     path('proses-data-chart-cbrawit/', view_chart_cbrawit.get_chart, name='data_chart_cbrawit'),
+
+    path('proses-testing-prediksi-cbrawit/', view_testing_prediksi_cbrawit.IndexView.as_view(), name='prediksi_cbrawit'),
+    path('proses-testing-prediksi-cbrawit-create/', view_testing_prediksi_cbrawit.create, name='create_prediksi_cbrawit'),
+    path('proses-testing-prediksi-cbmerah/', view_testing_prediksi_cbmerah.IndexView.as_view(), name='prediksi_cbmerah'),
+    path('proses-testing-prediksi-cbmerah-create/', view_testing_prediksi_cbmerah.create, name='create_prediksi_cbmerah'),
 ]

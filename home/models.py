@@ -191,3 +191,26 @@ class DataDenormalisasiCbMerah(models.Model):
 
     def __str__(self):
         return self.no
+
+
+class DataTestingCbRawit(models.Model):
+    no = models.CharField("No", max_length=50, blank=True, null=True)
+    harga = models.CharField("Harga", max_length=50, blank=True, null=True)
+    produksi = models.CharField("Produksi (KW)", max_length=50, blank=True, null=True)
+    ketersediaan = models.CharField("Ketersediaan (TON)", max_length=50, blank=True, null=True)
+    created_at = models.DateTimeField("Created At", auto_now_add=True)
+
+    def __str__(self):
+        return self.no
+
+
+class DataTestingCbMerah(models.Model):
+    no = models.CharField("No", max_length=50, blank=True, null=True)
+    harga = models.CharField("Harga", max_length=50, blank=True, null=True)
+    produksi = models.CharField("Produksi (KW)", max_length=50, blank=True, null=True)
+    ketersediaan = models.CharField("Ketersediaan (TON)", max_length=50, blank=True, null=True)
+    created_at = models.DateTimeField("Created At", auto_now_add=True)
+
+    def __str__(self):
+        return self.no
+

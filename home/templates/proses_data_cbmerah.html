@@ -10,9 +10,8 @@
 
       <div class="clearfix"></div>
 
-      <div class="row">
-
-        <div class="x_content"></div>
+        <div class="row">
+            <div class="x_content"></div>
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                     <li role="presentation" class="active"><a href="{% url 'home:data_cbmerah' %}" id="home-tab" role="tab" aria-expanded="true">Data</a>
@@ -29,56 +28,57 @@
                     <li role="presentation" class=""><a href="{% url 'home:denormalisasi_cbmerah' %}" role="tab" id="profile-tab2" aria-expanded="false">Denormalisasi</a>
                     </li>
                     {% endif %}
-                    <li role="presentation" class=""><a href="{% url 'home:chart_cbmerah' %}" role="tab" id="profile-tab2" aria-expanded="false">Hasil Prediksi</a>
+                    <li role="presentation" class=""><a href="{% url 'home:prediksi_cbmerah' %}" role="tab" id="profile-tab2" aria-expanded="false">Hasil Prediksi</a>
+                    </li>
+                    <li role="presentation" class=""><a href="{% url 'home:chart_cbmerah' %}" role="tab" id="profile-tab2" aria-expanded="false">Grafik</a>
                     </li>
                 </ul>
             </div>
         </div>
-        
+
         <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel">
-            <div class="x_title">
-                <h2><b>Data Cabai Merah</b></h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <table class="table table-striped table-bordered" id="datatable" cellspacing="0" width="100%">
-                <thead>
-                  <tr>                  
-                    <th width="4%" style="text-align: center;">No</th>
-                    <th width="8%" style="text-align: center;">Bulan</th>
-                    <th width="8%" style="text-align: center;">Tahun</th>
-                    <th width="20%" style="text-align: center;">Harga</th>
-                    <th width="20%" style="text-align: center;">Produksi (KW)</th>
-                    <th width="20%" style="text-align: center;">Ketersediaan (TON)</th>
-                    <th width="20%" style="text-align: center;">Permintaan (TON)</th>                
-                  </tr>
-                </thead>
-
-                <tbody>
-                    {% for data in data_list %}
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2><b>Data Cabai Merah</b></h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="table table-striped table-bordered" id="datatable" cellspacing="0" width="100%">
+                    <thead>
                       <tr>
-                          <td>
-                              {{ forloop.counter }}
-                          </td>
-                          <td> {{ data.bulan }} </td>
-                          <td> {{ data.tahun }}</td>
-                          <td align="right"> {{ data.harga }} </td>
-                          <td align="right"> {{ data.produksi }} </td>
-                          <td align="right"> {{ data.ketersediaan }} </td>
-                          <td align="right"> {{ data.permintaan }} </td>
-                          
+                        <th width="4%" style="text-align: center;">No</th>
+                        <th width="8%" style="text-align: center;">Bulan</th>
+                        <th width="8%" style="text-align: center;">Tahun</th>
+                        <th width="20%" style="text-align: center;">Harga</th>
+                        <th width="20%" style="text-align: center;">Produksi (KW)</th>
+                        <th width="20%" style="text-align: center;">Ketersediaan (TON)</th>
+                        <th width="20%" style="text-align: center;">Permintaan (TON)</th>
                       </tr>
-                    {% endfor %}
-                </tbody>
+                    </thead>
 
-              </table>
+                    <tbody>
+                        {% for data in data_list %}
+                          <tr>
+                              <td>
+                                  {{ forloop.counter }}
+                              </td>
+                              <td> {{ data.bulan }} </td>
+                              <td> {{ data.tahun }}</td>
+                              <td align="right"> {{ data.harga }} </td>
+                              <td align="right"> {{ data.produksi }} </td>
+                              <td align="right"> {{ data.ketersediaan }} </td>
+                              <td align="right"> {{ data.permintaan }} </td>
+
+                          </tr>
+                        {% endfor %}
+                    </tbody>
+
+                  </table>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- /page content -->
+</div>
+<!-- /page content -->
 
-  {% endblock %}
+{% endblock %}

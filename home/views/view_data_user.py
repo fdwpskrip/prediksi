@@ -135,6 +135,7 @@ def logout_view(request):
     logout(request)
     return redirect('/account/login/')
 
+
 def dashboard(request):
     if 'username' in request.session:
         return render(request, 'home_dashboard.html', {})

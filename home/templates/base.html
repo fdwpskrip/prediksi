@@ -50,7 +50,6 @@
               </div>
               <div class="profile_info">
                 <span>Welcome, {{ request.session.username }}</span>
-                <!-- nama user -->
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -60,19 +59,9 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                
                 <ul class="nav side-menu">
-                  <!-- {% if request.session.status == '1' %}
-                  <li>
-                    <a href="{% url 'home:data-user' %}"><i class="fa fa-table"></i> Data User</a>
-                  </li>
-                  {% endif %} -->
-                  <li>
-                    <a href="{% url 'home:dashboard' %}"><i class="fa fa-home"></i> Dashboard</a>
-                  </li>
-                  <li>
-                    <a href="{% url 'home:home_view' %}"><i class="fa fa-table"></i> Data Cabai</a>
-                  </li>
+                  <li><a href="{% url 'home:dashboard' %}"><i class="fa fa-home"></i> Dashboard</a></li>
+                  <li><a href="{% url 'home:home_view' %}"><i class="fa fa-table"></i> Data Cabai</a></li>
                   <li>
                     <a><i class="fa fa-desktop"></i> Proses ELM <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
