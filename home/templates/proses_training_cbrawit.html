@@ -31,7 +31,9 @@
                     <li role="presentation" class=""><a href="{% url 'home:denormalisasi_cbrawit' %}" role="tab" id="profile-tab2" aria-expanded="false">Denormalisasi</a>
                     </li>
                     {% endif %}
-                    <li role="presentation" class=""><a href="{% url 'home:chart_cbrawit' %}" role="tab" id="profile-tab2" aria-expanded="false">Hasil Prediksi</a>
+                    <li role="presentation" class=""><a href="{% url 'home:prediksi_cbrawit' %}" role="tab" id="profile-tab2" aria-expanded="false">Hasil Prediksi</a>
+                    </li>
+                    <li role="presentation" class=""><a href="{% url 'home:chart_cbrawit' %}" role="tab" id="profile-tab2" aria-expanded="false">Grafik</a>
                     </li>
                 </ul>
             </div>
@@ -439,7 +441,7 @@
                                 <thead>
                                     <tr>
                                         <th width="5%" style="text-align: center;"></th>
-                                        {% for i in data.data_h_transpose %}
+                                        {% for i in data.data_matriks_mp.0 %}
                                             <th width="20%">{{ forloop.counter }}</th>
                                         {% endfor %}
                                     </tr>

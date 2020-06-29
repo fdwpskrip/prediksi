@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import TextInput
 
-from .models import DataCbRawit, DataCbMerah
+from .models import DataCbRawit, DataCbMerah, DataTestingCbRawit, DataTestingCbMerah
 
 RASIO_CHOICES = (
         ('-', '--Pilih Rasio Data--'),
@@ -23,7 +23,25 @@ class DataCbRawitForm(forms.ModelForm):
         fields = "__all__"
 
 
+class DataTestingCbRawitForm(forms.ModelForm):
+    class Meta:
+        model = DataTestingCbRawit
+        fields = "__all__"
+
+
 class DataCbMerahForm(forms.ModelForm):
+    class Meta:
+        model = DataCbMerah
+        fields = "__all__"
+
+
+class DataTestingCbMerahForm(forms.ModelForm):
+    class Meta:
+        model = DataTestingCbMerah
+        fields = "__all__"
+
+
+class DataForm(forms.ModelForm):
     class Meta:
         model = DataCbMerah
         fields = "__all__"
