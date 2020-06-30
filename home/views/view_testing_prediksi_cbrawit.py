@@ -47,3 +47,15 @@ def edit(request, pk, template_name='edit_cbrawit.html'):
 
         return redirect('home:prediksi_cbrawit')
     return render(request, template_name, {'form': form})
+
+
+def delete(request, pk, template_name='confirm_delete_cbrawit.html'):
+    data = get_object_or_404(DataTestingCbRawit, pk=pk)
+    if request.method == 'POST':
+        data.delete()
+
+        # Prediksi
+        prediksi.get_data_testing('cbrawit')
+
+        return redirect('home:prediksi_cbrawit')
+    return render(request, template_name, {'object': data})

@@ -46,3 +46,15 @@ def edit(request, pk, template_name='edit_cbmerah.html'):
 
         return redirect('home:prediksi_cbmerah')
     return render(request, template_name, {'form': form})
+
+
+def delete(request, pk, template_name='confirm_delete_cbmerah.html'):
+    data = get_object_or_404(DataTestingCbMerah, pk=pk)
+    if request.method == 'POST':
+        data.delete()
+
+        # Prediksi
+        prediksi.get_data_testing('cbmerah')
+
+        return redirect('home:prediksi_cbmerah')
+    return render(request, template_name, {'object': data})
