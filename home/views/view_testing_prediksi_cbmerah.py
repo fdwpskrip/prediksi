@@ -20,11 +20,12 @@ class DataDetailView(DetailView):
 
 
 def create(request):
-    form = DataTestingCbMerahForm()
+    form = DataTestingCbMerahForm(initial={"permintaan": "0"})
 
     if request.method == 'POST':
         form = DataTestingCbMerahForm(request.POST)
         if form.is_valid():
+            form.fields['permintaan'].initial = 0
             form.save()
 
             # Prediksi
@@ -37,7 +38,7 @@ def create(request):
 
 def edit(request, pk, template_name='edit_cbmerah.html'):
     data = get_object_or_404(DataTestingCbMerah, pk=pk)
-    form = DataTestingCbMerahForm(request.POST or None, instance=data)
+    form = DataTestingCbMerahForm(request.POST or None, instance=data, initial={"permintaan": "0"})
     if form.is_valid():
         form.save()
 
