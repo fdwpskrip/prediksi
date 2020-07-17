@@ -82,20 +82,48 @@ def getnormalisasi(list_data):
     listketersediaan = list_data['listketersediaan']
     listpermintaan = list_data['listpermintaan']
 
+    if len(listharga) > 0:
+        minharga = min([int(i) for i in listharga])
+        maxharga = max([int(i) for i in listharga])
+    else:
+        minharga = 0
+        maxharga = 0
+
+    if len(listproduksi) > 0:
+        minproduksi = min([float(i) for i in listproduksi])
+        maxproduksi = max([float(i) for i in listproduksi])
+    else:
+        minproduksi = 0
+        maxproduksi = 0
+
+    if len(listketersediaan) > 0:
+        minketersediaan = min([float(i) for i in listketersediaan])
+        maxketersediaan = max([float(i) for i in listketersediaan])
+    else:
+        minketersediaan = 0
+        maxketersediaan = 0
+
+    if len(listpermintaan) > 0:
+        minpermintaan = min([float(i) for i in listpermintaan])
+        maxpermintaan = max([float(i) for i in listpermintaan])
+    else:
+        minpermintaan = 0
+        maxpermintaan = 0
+
     minvalue = {
         'type': 'Min',
-        'harga': min([int(i) for i in listharga]),
-        'produksi': min([float(i) for i in listproduksi]),
-        'ketersediaan': min([float(i) for i in listketersediaan]),
-        'permintaan': min([float(i) for i in listpermintaan])
+        'harga': minharga,
+        'produksi': minproduksi,
+        'ketersediaan': minketersediaan,
+        'permintaan': minpermintaan
     }
 
     maxvalue = {
         'type': 'Max',
-        'harga': max([int(i) for i in listharga]),
-        'produksi': max([float(i) for i in listproduksi]),
-        'ketersediaan': max([float(i) for i in listketersediaan]),
-        'permintaan': max([float(i) for i in listpermintaan])
+        'harga': maxharga,
+        'produksi': maxproduksi,
+        'ketersediaan': maxketersediaan,
+        'permintaan': maxpermintaan
     }
 
     newmin = 0.1
