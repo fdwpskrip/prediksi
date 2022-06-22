@@ -5,7 +5,7 @@ et-xmlfile==1.0.1
 jdcal==1.4.1
 lml==0.0.9
 mysqlclient==1.4.6
-numpy==1.18.3
+numpy==1.22.0
 openpyxl==3.0.3
 pyexcel-io==0.5.20
 pyexcel-xls==0.5.8
